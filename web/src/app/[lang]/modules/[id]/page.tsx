@@ -4,6 +4,7 @@ import { CircuitExplorer } from "@/components/CircuitExplorer";
 import { PersonaPreview } from "@/components/PersonaPreview";
 import {
   getAttributionCases,
+  getColabUrl,
   getCourse,
   getDoc,
   getLocalizedSummary,
@@ -64,6 +65,7 @@ export default async function ModulePage({
   const title = getLocalizedTitle(module, language);
   const summary = getLocalizedSummary(module, language);
   const paths = modulePaths(module, language);
+  const colab = getColabUrl(paths.notebook);
 
   return (
     <main className="content-grid">
@@ -97,6 +99,9 @@ export default async function ModulePage({
         <div className="link-stack">
           <code>{paths.doc}</code>
           <code>{paths.notebook}</code>
+          <a href={colab} rel="noreferrer" target="_blank">
+            {language === "zh" ? "在 Colab 中打开" : "Open in Colab"}
+          </a>
           {module.paper_refs.map((paper) => (
             <a href={paper.url} key={paper.url} rel="noreferrer" target="_blank">
               {paper.date} · {paper.title}

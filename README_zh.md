@@ -16,14 +16,14 @@
 ## 课程地图
 
 <!-- COURSE_TABLE:START -->
-| 模块 | 主题 | 运行层级 | 说明 |
-|---|---|---|---|
-| `M00` | 视觉电路热身 | `warmup` | 复用原始 Zoom In 视觉电路材料，先建立 feature、circuit 和 intervention 的直觉。 |
-| `M01` | Superposition | `cpu-colab` | 用小型稀疏 toy model 理解为什么神经元经常不是干净的语义单位。 |
-| `M02` | 单语义特征与字典学习 | `cpu-colab` | 用教学版 SAE 理解从 neuron 视角过渡到 feature 视角的原因与收益。 |
-| `M03` | 特征探针与 Steering | `cpu-colab` | 在小型可运行实验里展示 feature 如何同时承担读取和干预的角色。 |
-| `M04` | Circuit Tracing | `artifact-guided` | 借助预计算 attribution graph 学会如何阅读 LLM 的局部计算路径。 |
-| `M05` | Character and Control | `artifact-guided` | 通过 persona vectors 和前沿阅读，把 interpretability 与 character control 连接起来。 |
+| 模块 | 主题 | Notebook | Colab | 运行层级 | 说明 |
+|---|---|---|---|---|---|
+| `M00` | 视觉电路热身 | [打开](notebooks/zh/m00_vision_circuits.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m00_vision_circuits.ipynb) | `warmup` | 复用原始 Zoom In 视觉电路材料，先建立 feature、circuit 和 intervention 的直觉。 |
+| `M01` | Superposition | [打开](notebooks/zh/m01_superposition.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m01_superposition.ipynb) | `cpu-colab` | 用小型稀疏 toy model 理解为什么神经元经常不是干净的语义单位。 |
+| `M02` | 单语义特征与字典学习 | [打开](notebooks/zh/m02_monosemantic_features.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m02_monosemantic_features.ipynb) | `cpu-colab` | 用教学版 SAE 理解从 neuron 视角过渡到 feature 视角的原因与收益。 |
+| `M03` | 特征探针与 Steering | [打开](notebooks/zh/m03_feature_probes_steering.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m03_feature_probes_steering.ipynb) | `cpu-colab` | 在小型可运行实验里展示 feature 如何同时承担读取和干预的角色。 |
+| `M04` | Circuit Tracing | [打开](notebooks/zh/m04_circuit_tracing.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m04_circuit_tracing.ipynb) | `artifact-guided` | 借助预计算 attribution graph 学会如何阅读 LLM 的局部计算路径。 |
+| `M05` | Character and Control | [打开](notebooks/zh/m05_character_control.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m05_character_control.ipynb) | `artifact-guided` | 通过 persona vectors 和前沿阅读，把 interpretability 与 character control 连接起来。 |
 <!-- COURSE_TABLE:END -->
 
 ## 学习设计

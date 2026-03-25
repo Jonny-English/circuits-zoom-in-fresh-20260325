@@ -11,7 +11,19 @@ OUTPUT_ROOT = ROOT / "notebooks"
 
 
 def repo_root_snippet() -> str:
-    return """from pathlib import Path
+    return """import os
+import subprocess
+import sys
+from pathlib import Path
+
+REPO_URL = "https://github.com/Jonny-English/circuits-zoom-in-fresh-20260325.git"
+REPO_DIR = "circuits-zoom-in-fresh-20260325"
+
+if "google.colab" in sys.modules:
+    candidate = Path("/content") / REPO_DIR
+    if not candidate.exists():
+        subprocess.run(["git", "clone", "--depth", "1", REPO_URL, str(candidate)], check=True)
+    os.chdir(candidate)
 
 root = Path.cwd().resolve()
 while not (root / "content" / "course.json").exists():

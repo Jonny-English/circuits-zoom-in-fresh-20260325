@@ -135,6 +135,10 @@ export function getLocalizedSummary(module: CourseModule, language: "zh" | "en")
   return language === "zh" ? module.summary_zh : module.summary_en;
 }
 
+export function getColabUrl(relativeNotebookPath: string): string {
+  return `https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/${relativeNotebookPath}`;
+}
+
 export function flattenTimeline(course: CourseModule[]) {
   const seen = new Set<string>();
   const timeline = [];

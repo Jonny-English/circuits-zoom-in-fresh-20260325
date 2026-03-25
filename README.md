@@ -16,14 +16,14 @@ The repository now has three synced layers:
 ## Course map
 
 <!-- COURSE_TABLE:START -->
-| Module | Topic | Runnable tier | Why it matters |
-|---|---|---|---|
-| `M00` | Vision Circuits Warm-up | `warmup` | Reuse the original Zoom In visual-circuits material to establish intuition for features, circuits, and interventions. |
-| `M01` | Superposition | `cpu-colab` | Use a sparse toy model to understand why neurons are often not clean semantic units. |
-| `M02` | Monosemantic Features and Dictionary Learning | `cpu-colab` | Use a teaching-scale SAE to understand the shift from neuron-centric to feature-centric analysis. |
-| `M03` | Feature Probes and Steering | `cpu-colab` | Show, in a small runnable experiment, how features can support both reading and intervention. |
-| `M04` | Circuit Tracing | `artifact-guided` | Learn to read local computation paths in an LLM through precomputed attribution graphs. |
-| `M05` | Character and Control | `artifact-guided` | Connect interpretability to character control through persona vectors and frontier reading. |
+| Module | Topic | Notebook | Colab | Runnable tier | Why it matters |
+|---|---|---|---|---|---|
+| `M00` | Vision Circuits Warm-up | [Open](notebooks/en/m00_vision_circuits.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m00_vision_circuits.ipynb) | `warmup` | Reuse the original Zoom In visual-circuits material to establish intuition for features, circuits, and interventions. |
+| `M01` | Superposition | [Open](notebooks/en/m01_superposition.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m01_superposition.ipynb) | `cpu-colab` | Use a sparse toy model to understand why neurons are often not clean semantic units. |
+| `M02` | Monosemantic Features and Dictionary Learning | [Open](notebooks/en/m02_monosemantic_features.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m02_monosemantic_features.ipynb) | `cpu-colab` | Use a teaching-scale SAE to understand the shift from neuron-centric to feature-centric analysis. |
+| `M03` | Feature Probes and Steering | [Open](notebooks/en/m03_feature_probes_steering.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m03_feature_probes_steering.ipynb) | `cpu-colab` | Show, in a small runnable experiment, how features can support both reading and intervention. |
+| `M04` | Circuit Tracing | [Open](notebooks/en/m04_circuit_tracing.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m04_circuit_tracing.ipynb) | `artifact-guided` | Learn to read local computation paths in an LLM through precomputed attribution graphs. |
+| `M05` | Character and Control | [Open](notebooks/en/m05_character_control.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m05_character_control.ipynb) | `artifact-guided` | Connect interpretability to character control through persona vectors and frontier reading. |
 <!-- COURSE_TABLE:END -->
 
 ## Learning design

@@ -20,30 +20,28 @@ That second layer exists to stop the most common self-study failure mode: finish
 ## Who This Project Is For
 
 - It is beginner-friendly for readers with basic Python and PyTorch but little or no mechanistic-interpretability background.
-- It is for readers who want to move from "I can follow a few papers" to "I can start contributing as a large-model research apprentice inside a company."
+- It is for readers who want to move from "I can follow a few papers" to "I can take on clearly scoped research tasks inside a company."
 - It is not designed as passive popularization. You are expected to write reading notes, experiment logs, and short memos.
 
-The target output of this repository is not "a person who has seen many papers." The target output is a `P6`-level large-model research apprentice.
+The target output of this repository is not "a person who has seen many papers." The target output is someone approaching the capability density of an Alibaba-style `P6` large-model research engineer.
 
-Here `P` means an internal `Progression` ladder rather than a formal title:
+To reduce ambiguity, the ladder below is rewritten to match the public, commonly used understanding of Alibaba-style `P4-P12` technical levels:
 
 | Level | Capability |
 |---|---|
-| `P0` | Complete beginner who knows large models are important but cannot yet run the environment, read plots, or log experiments reliably. |
-| `P1` | Can run notebooks by following instructions, but still cannot explain the core concepts clearly. |
-| `P2` | Can restate the question, method, and main result of a single paper. |
-| `P3` | Can write basic paper-reading notes and experiment logs, and is starting to build research discipline. |
-| `P4` | Can change one variable family independently, compare baseline versus variant, and write an initial judgment. |
-| `P5` | Can read artifacts, identify limitations, write short memos, and separate observation from inference. |
-| `**P6**` | Can operate inside a company research setting on entry-level tasks under a mentor or research lead: read, reproduce, critique, and propose the next experiment. |
-| `P7` | Can propose and run a two-week-scale research plan on a small problem with consistent reporting. |
-| `P8` | Can own a sub-area or tooling line and guide `P5-P6` collaborators. |
-| `P9` | Can define a medium-term team research thread and connect experiments, tools, and communication. |
-| `P10` | Can lead quarter-scale research direction while connecting research judgment to product and safety constraints. |
-| `P11` | Can define institution-level agenda, standards, and talent-development patterns. |
-| `P12` | Can change the field's understanding of how large models work and how they should be controlled. |
+| `P4` | Entry-level engineer: can work under explicit guidance, run notebooks, reproduce setup steps, and explain basic concepts, but still lacks strong independent research judgment. |
+| `P5` | Engineer: can independently reproduce a scoped result, keep experiment logs, compare baseline versus variant, and write basic conclusions. |
+| `**P6**` | Senior engineer / strong IC starting point: can take a clearly scoped research task inside a company, read papers, reproduce results, critique evidence, and propose the next experiment. |
+| `P7` | Expert: can define a small direction, design a two-week research plan, and close the loop across experiments, tools, and reporting. |
+| `P8` | Senior expert: can own a research sub-area or tooling line and create sustained technical leverage across multiple collaborators. |
+| `P9` | Principal / senior expert: can define a medium-term research thread and influence methods, judgment, and collaboration across teams. |
+| `P10` | Fellow / organization-level expert: can set organization-level research direction, choose key methodological bets, and influence product and safety strategy. |
+| `P11` | Company-level top technical leader: can define long-term agenda, standards, and talent systems. |
+| `P12` | Industry-shaping figure: can significantly change how the field frames the technology and its control problems. |
 
-The realistic target of this repository is to move a reader from roughly `P0-P2` to `P6`. Strong completers may start touching the lower edge of `P7`.
+On that scale, no single teaching project should claim "finish this and become `P10`." In Alibaba-style language, `P10` is already a very high organization-level expert bar.
+
+The credible target of this repository is narrower: move a true beginner from below an Alibaba-style `P4` state toward `P5`, with strong completers beginning to touch the lower edge of `P6`. It is the start of a research path, not the end-state.
 
 ## Why Learn This
 
@@ -64,6 +62,20 @@ When models can already perform a large amount of local cognitive work, the scar
 - understanding how to turn those judgments into research, tooling, and product decisions
 
 So learning interpretability is not just learning a set of paper summaries. It is learning how to understand and steer machine intelligence once the machine itself becomes the central productive object.
+
+Put more precisely: AI is also just another layer of abstraction over lower-level computation.
+
+- Assembly is a layer of abstraction over machine code.
+- High-level languages are another layer over assembly.
+- Large models and AI systems are one more layer of abstraction built on top of those computational stacks.
+
+So the right focus is no longer only the fine-grained craft of manually executing the old workflow. The focus shifts toward:
+
+- what capability this abstraction layer exposes
+- what mechanism this abstraction layer hides
+- how we understand, use, debug, and control this abstraction layer
+
+That is also why this repository is not only about paper summaries. It is also about experiments, artifacts, steering, tracing, and research communication.
 
 ## One Article, One Colab
 

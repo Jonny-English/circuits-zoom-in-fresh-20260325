@@ -2,7 +2,7 @@
 
 ## Goal
 
-Connect feature-style thinking to character traits by treating persona as a direction in representation space.
+Recover a teaching-scale persona direction locally, then connect feature-style thinking to character traits by treating persona as a direction in representation space.
 
 ## Core reference
 
@@ -18,6 +18,7 @@ Connect feature-style thinking to character traits by treating persona as a dire
 
 - Notebook: `notebooks/en/m08_persona_vectors.ipynb`
 - Shared artifact: `artifacts/m08_persona_vectors.json`
+- The notebook now recovers a toy persona direction first and then compares it to the shared artifact.
 
 ## Self-check questions
 
@@ -27,4 +28,4 @@ Connect feature-style thinking to character traits by treating persona as a dire
 
 ## Takeaway
 
-Interpretability starts touching model character once representation directions become behaviorally meaningful.
+Interpretability starts touching model character once representation directions become behaviorally meaningful, and the notebook now makes that concrete by letting the reader recover one direction before reading the richer shared artifact.

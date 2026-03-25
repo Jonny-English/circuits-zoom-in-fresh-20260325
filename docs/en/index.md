@@ -2,6 +2,11 @@
 
 This course is article-first: every paper in the core path has its own note, its own notebook, and its own position in the learning sequence.
 
+## Pre-P4 foundation pack
+
+- [Foundation pack overview](foundations/index.md)
+- If notebook execution, attention reading, or experiment logging still feel unstable, do `F00-F03` before the article core.
+
 ## Reading order
 
 1. [M00 Zoom In: An Introduction to Circuits](modules/m00-zoom-in-circuits.md)
@@ -31,6 +36,8 @@ This course is article-first: every paper in the core path has its own note, its
 - [Research playbook](program/research-playbook.md)
 - [Evaluation rubric](program/evaluation-rubric.md)
 - [Company onramp simulation](program/company-onramp.md)
+- [Reference-output layer](program/reference-outputs.md)
+- [Advanced extension track](program/advanced-extensions.md)
 
 Use the track in this order:
 
@@ -43,6 +50,6 @@ Use the track in this order:
 ## Ground rules
 
 - `M00-M05` are runnable on CPU or free Colab.
-- `M06-M10` are teaching reconstructions built around precomputed artifacts, not full paper-scale reproductions.
+- `M06` and `M08` now include lightweight local reproductions; `M03`, `M07`, `M09`, and `M10` still remain primarily artifact-guided teaching reconstructions.
 - Chinese and English stay structurally mirrored. If you add an article note in one language, add it in the other.
 - If your goal is company research readiness, output quality matters more than completion counts.

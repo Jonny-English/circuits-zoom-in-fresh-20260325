@@ -13,7 +13,11 @@
 - `docs/zh` 与 `docs/en`：结构完全镜像的文章讲义。
 - `notebooks/zh` 与 `notebooks/en`：结构完全镜像的文章 notebook，`web/` 则把同一份元数据渲染成静态课程站。
 
-现在仓库还多了一层面向严肃学习者的内容：research-ready path，包括 12 周训练营、memo 模板、rubric 和公司研究模拟任务。
+现在仓库还多了三层强化内容：
+
+- `Pre-P4 基础包`：补环境、attention 形状感、向量几何和实验纪律。
+- `research-ready path`：12 周训练营、memo 模板、rubric 和公司研究模拟任务。
+- `参考答案层 + 扩展论文轨道`：用样例校准输出密度，并把视野扩到 Anthropic 主线之外。
 
 这一层的目的，是避免自学里最常见的失败模式：内容看完了，但研究习惯没有建立起来。
 
@@ -51,7 +55,7 @@
 
 - 适合：会一点 Python，但环境、数学、实验记录都还不稳定的人。
 - 进入信号：你还不能稳定跑 notebook、看懂基础图表，或者还说不清 baseline 是什么。
-- 建议走法：先完成 `M00`、`M01`，把 reading note 和 experiment log 模板用熟，再进入完整课程。
+- 建议走法：先完成 `F00-F03` 和 `M00`、`M01`，把 reading note 和 experiment log 模板用熟，再进入完整课程。
 - 目标：先把自己推进到接近阿里式 `P4`，再继续冲击 `P5`。
 
 ### 基础者起跑线
@@ -95,6 +99,19 @@
 
 这也是为什么这个项目既讲论文，也讲实验、artifact、steering、tracing 和研究写作。
 
+## Pre-P4 基础包
+
+如果你连 notebook、图表、attention 形状、baseline/sweep/ablation 这些都还不稳，就不要急着直接读主线论文，先补这 4 个 lab。
+
+<!-- FOUNDATION_TABLE:START -->
+| ID | 基础 Lab | Notebook | Colab | 运行层级 | 你会补齐什么 |
+|---|---|---|---|---|---|
+| `F00` | 环境、图表与基线纪律 | [打开](notebooks/foundations/zh/f00_environment_plots_baselines.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/foundations/zh/f00_environment_plots_baselines.ipynb) | `cpu-colab` | 建立本地/Colab 工作流，学会读 loss 曲线，并理解 baseline、variant 与日志记录的最小纪律。 |
+| `F01` | Transformer 形状与注意力读图 | [打开](notebooks/foundations/zh/f01_transformer_shapes_attention.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/foundations/zh/f01_transformer_shapes_attention.ipynb) | `cpu-colab` | 用一个极小 attention 例子掌握 token、head、QK 打分、softmax 和 residual update 的形状感。 |
+| `F02` | 向量几何、特征与探针 | [打开](notebooks/foundations/zh/f02_vector_geometry_features_probes.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/foundations/zh/f02_vector_geometry_features_probes.ipynb) | `cpu-colab` | 在二维和高维 toy 向量上练习 cosine、投影、方向相似和线性 probe，给 feature 语言补上几何底座。 |
+| `F03` | Sweep、Ablation 与 Failure Analysis | [打开](notebooks/foundations/zh/f03_sweeps_ablations_failure_analysis.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/foundations/zh/f03_sweeps_ablations_failure_analysis.ipynb) | `cpu-colab` | 用一个小实验练习 sweep、ablation、停止条件和 failure analysis，把“会跑 notebook”推进到“会设计最小实验”。 |
+<!-- FOUNDATION_TABLE:END -->
+
 ## 一篇文章，一个 Colab
 
 下面每一行都对应一篇文章和一份 notebook。现在每篇讲义和每本 Colab 也都带有验收题，用来帮助读者检查自己到底学到了什么。
@@ -108,20 +125,21 @@
 | `M03` | Mapping the Mind | `2024-05-21` | [打开](notebooks/zh/m03_mapping_the_mind.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m03_mapping_the_mind.ipynb) | `artifact-guided` | 浏览教学版 feature catalog，理解“发现大量特征”到底意味着什么。 |
 | `M04` | Features as Classifiers | `2024-10-16` | [打开](notebooks/zh/m04_features_as_classifiers.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m04_features_as_classifiers.ipynb) | `cpu-colab` | 把 feature 当成分类器输入，理解“读出”能力从哪里来。 |
 | `M05` | Evaluating Feature Steering | `2024-10-25` | [打开](notebooks/zh/m05_evaluating_feature_steering.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m05_evaluating_feature_steering.ipynb) | `cpu-colab` | 扫描 steering 强度，观察 target gain、sweet spot 与 off-target cost 的平衡。 |
-| `M06` | Tracing the Thoughts | `2025-03-27` | [打开](notebooks/zh/m06_tracing_thoughts.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m06_tracing_thoughts.ipynb) | `artifact-guided` | 用预计算 attribution graph 学会阅读一条局部计算路径。 |
+| `M06` | Tracing the Thoughts | `2025-03-27` | [打开](notebooks/zh/m06_tracing_thoughts.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m06_tracing_thoughts.ipynb) | `cpu-colab` | 先在本地跑一个 toy tracing 复现，再用共享 attribution graph 学会阅读一条局部计算路径。 |
 | `M07` | Circuit Tracing Tools | `2025-05-29` | [打开](notebooks/zh/m07_circuit_tracing_tools.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m07_circuit_tracing_tools.ipynb) | `artifact-guided` | 查看 tracing artifact 与工作流拆解，理解工具层如何支撑分析。 |
-| `M08` | Persona Vectors | `2025-08-01` | [打开](notebooks/zh/m08_persona_vectors.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m08_persona_vectors.ipynb) | `artifact-guided` | 通过 persona vector 的前后对比，理解 character trait 如何被表示成方向。 |
+| `M08` | Persona Vectors | `2025-08-01` | [打开](notebooks/zh/m08_persona_vectors.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m08_persona_vectors.ipynb) | `cpu-colab` | 先在本地构造一个教学版 persona direction，再用共享 artifact 对比 trait 前后变化。 |
 | `M09` | Signs of Introspection | `2025-10-29` | [打开](notebooks/zh/m09_signs_of_introspection.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m09_signs_of_introspection.ipynb) | `artifact-guided` | 用教学数据对比 self-report 与行为信号，讨论“内省迹象”到底意味着什么。 |
 | `M10` | The Assistant Axis | `2026-01-19` | [打开](notebooks/zh/m10_assistant_axis.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/zh/m10_assistant_axis.ipynb) | `artifact-guided` | 把不同 assistant 风格投到同一条轴上，观察 character 稳定化问题。 |
 <!-- COURSE_TABLE:END -->
 
 ## 推荐路径
 
+- `Pre-P4 基础包`：`F00 → F01 → F02 → F03`
 - `基础段`：`M00 → M01 → M02`
 - `feature 段`：`M03 → M04 → M05`
 - `tracing 与 character 段`：`M06 → M07 → M08 → M09 → M10`
 
-如果你想先走最短有效路径，建议先看 `M00`、`M01`、`M02`、`M05`、`M06`。
+如果你想先走最短有效路径，建议先做 `F00`、再看 `M00`、`M01`、`M02`、`M05`、`M06`。
 
 ## Research-Ready Path
 
@@ -132,6 +150,8 @@
 - [研究工作流](docs/zh/program/research-playbook.md)
 - [评估 rubric](docs/zh/program/evaluation-rubric.md)
 - [公司入职模拟](docs/zh/program/company-onramp.md)
+- [参考答案层](docs/zh/program/reference-outputs.md)
+- [扩展论文轨道](docs/zh/program/advanced-extensions.md)
 
 模板：
 
@@ -139,12 +159,40 @@
 - [Experiment log](templates/experiment_log_zh.md)
 - [Research memo](templates/research_memo_zh.md)
 
+内部训练阶段现在统一用 `S0-S4` 命名，和上面的阿里式 `P4-P12` 能力映射分开，避免把“课程阶段”误读成“公司职级”。
+
 把 research-ready path 当成一套工作系统，而不是额外阅读：
 
 - 每篇文章都应该留下 reading note、experiment log、短 memo 和 next-question list。
 - 这条路径默认你每周投入 `8-12` 小时的专注学习时间。
 - 结营时应该拿得出真实作品集：notes、logs、memos、artifact critique 和两周 capstone proposal。
 - 标准不是“我跟着 notebook 跑过了”，而是“我能读、能复现、能批判、也能提出下一步实验”。
+
+## 参考答案层
+
+这层不是给你抄，而是给你校准“什么叫一个能交给导师、经理或面试流程看的输出”。
+
+<!-- REFERENCE_TABLE:START -->
+| ID | 参考输出 | 文件 | 什么时候用 |
+|---|---|---|---|
+| `R01` | 参考论文简报 | [examples/zh/reference_paper_brief.md](examples/zh/reference_paper_brief.md) | 用在公司模拟任务 T1 或任何 paper reading note 之后的压缩写作。 |
+| `R02` | 参考实验日志 | [examples/zh/reference_experiment_log.md](examples/zh/reference_experiment_log.md) | 用在任何 sweep、ablation 或 feature-steering notebook 之后。 |
+| `R03` | 参考 Artifact Critique | [examples/zh/reference_artifact_critique.md](examples/zh/reference_artifact_critique.md) | 用在 M03、M07、M09、M10 或公司模拟任务 T3。 |
+| `R04` | 参考两周提案 | [examples/zh/reference_two_week_proposal.md](examples/zh/reference_two_week_proposal.md) | 用在 capstone 或公司模拟任务 T4 之前校准自己的提案密度。 |
+<!-- REFERENCE_TABLE:END -->
+
+## 扩展论文轨道
+
+主线课程故意围绕 Anthropic interpretability 弧线来组织，但如果你的目标是进入公司研究，这还不够。做完主线后，继续补 transformer circuits、经典行为电路和 auditing 视角。
+
+<!-- EXTENSION_TABLE:START -->
+| ID | 扩展论文 | 链接 | 为什么现在读 | 你要交什么 |
+|---|---|---|---|---|
+| `X01` | A Mathematical Framework for Transformer Circuits | [原文](https://transformer-circuits.pub/2021/framework/index.html) | 当你已经做完 M06 之后，这篇能把你从“会读一张图”推进到“会说一个一般框架”。 | 写 1 页 framework brief，并把 M06 里的一个 toy trace 用 residual-stream 与 composition 语言重述。 |
+| `X02` | In-context Learning and Induction Heads | [原文](https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html) | 它把 attention 读图、circuit 语言和具体行为现象连起来，是进入经典 transformer circuits 的第一站。 | 做一个最小复制任务的阅读笔记，并说明 induction head 为什么比单个 attention 热点更像“机制”。 |
+| `X03` | Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 Small | [原文](https://arxiv.org/abs/2211.00593) | 做完 Anthropic 主线后，这篇能逼你处理更脏的行为定义、更多的头和更复杂的证据链。 | 写 1 份 IOI evidence chain 速记，指出这类行为任务比 M06 toy trace 多了哪些不确定性。 |
+| `X04` | Auditing Language Models for Hidden Objectives | [原文](https://www.anthropic.com/research/auditing-hidden-objectives) | 如果你的终点是公司研究，这篇能把 feature、tracing 和 safety 研究的接口放到同一张图里。 | 写 1 份 auditing memo，说明如果怀疑模型有隐藏目标，你会先看哪些行为信号、哪些内部证据、哪些停机标准。 |
+<!-- EXTENSION_TABLE:END -->
 
 ## 快速开始
 
@@ -178,8 +226,9 @@ npm run build
 ```text
 .
 ├── content/               # 课程元数据与术语表
-├── docs/                  # 中英文镜像文章讲义
-├── notebooks/             # 旧版长 notebook + 新版文章 notebook
+├── docs/                  # 中英文镜像文章讲义 + 基础包 + 训练营文档
+├── notebooks/             # 旧版长 notebook + 文章 notebook + foundation labs
+├── examples/              # 论文简报、实验日志、critique、proposal 参考样例
 ├── artifacts/             # 供 notebook / web 共享的 JSON artifact
 ├── web/                   # 静态 Next.js 课程站
 ├── scripts/               # notebook 生成与校验脚本

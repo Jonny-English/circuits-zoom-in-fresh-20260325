@@ -29,10 +29,53 @@ export type GlossaryTerm = {
   definition_en: string;
 };
 
+export type FoundationLab = {
+  id: string;
+  order: number;
+  title_zh: string;
+  title_en: string;
+  summary_zh: string;
+  summary_en: string;
+  prereqs: string[];
+  skills_zh: string[];
+  skills_en: string[];
+  deliverables_zh: string[];
+  deliverables_en: string[];
+  questions_zh: string[];
+  questions_en: string[];
+  runnable_tier: string;
+  web_slug: string;
+};
+
 export type SelfCheck = {
   module_id: string;
   questions_zh: string[];
   questions_en: string[];
+};
+
+export type ReferenceOutput = {
+  id: string;
+  title_zh: string;
+  title_en: string;
+  summary_zh: string;
+  summary_en: string;
+  path_zh: string;
+  path_en: string;
+  best_for_zh: string;
+  best_for_en: string;
+};
+
+export type ExtensionPaper = {
+  id: string;
+  title_zh: string;
+  title_en: string;
+  source_url: string;
+  summary_zh: string;
+  summary_en: string;
+  why_now_zh: string;
+  why_now_en: string;
+  assignment_zh: string;
+  assignment_en: string;
 };
 
 export type ProgramPayload = {
@@ -229,6 +272,10 @@ export function getGlossary(): GlossaryTerm[] {
   return readJson<GlossaryTerm[]>("content/glossary.json");
 }
 
+export function getFoundations(): FoundationLab[] {
+  return readJson<FoundationLab[]>("content/foundations.json").sort((a, b) => a.order - b.order);
+}
+
 export function getSelfChecks(): SelfCheck[] {
   return readJson<SelfCheck[]>("content/self_checks.json");
 }
@@ -243,6 +290,14 @@ export function getSelfCheck(id: string): SelfCheck {
 
 export function getProgram(): ProgramPayload {
   return readJson<ProgramPayload>("content/program.json");
+}
+
+export function getReferenceOutputs(): ReferenceOutput[] {
+  return readJson<ReferenceOutput[]>("content/reference_outputs.json");
+}
+
+export function getExtensions(): ExtensionPaper[] {
+  return readJson<ExtensionPaper[]>("content/extensions.json");
 }
 
 export function getConceptGraph(): ConceptGraph {

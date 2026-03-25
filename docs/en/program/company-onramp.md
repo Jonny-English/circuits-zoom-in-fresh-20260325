@@ -32,7 +32,7 @@ The point of this file is to simulate task shape. Real company work is rarely "r
 ## Task 3: Adversarial artifact reading
 
 - Timebox: 90-120 minutes
-- Input: one artifact-guided article from `M06-M10`
+- Input: one artifact-heavy article from `M03`, `M07`, `M09`, or `M10`
 - Required output:
   - one critique
   - one ambiguity list

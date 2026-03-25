@@ -7,6 +7,9 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 COURSE_PATH = ROOT / "content" / "course.json"
+FOUNDATIONS_PATH = ROOT / "content" / "foundations.json"
+REFERENCE_OUTPUTS_PATH = ROOT / "content" / "reference_outputs.json"
+EXTENSIONS_PATH = ROOT / "content" / "extensions.json"
 REPO_SLUG = "Jonny-English/circuits-zoom-in-fresh-20260325"
 README_PATHS = {
     "en": ROOT / "README.md",
@@ -26,6 +29,18 @@ def colab_url(module: dict, language: str) -> str:
     )
 
 
+def foundation_notebook_path(lab: dict, language: str) -> str:
+    filename = f"{lab['id'].lower()}_{lab['web_slug'].replace('-', '_')}.ipynb"
+    return f"notebooks/foundations/{language}/{filename}"
+
+
+def foundation_colab_url(lab: dict, language: str) -> str:
+    return (
+        "https://colab.research.google.com/github/"
+        f"{REPO_SLUG}/blob/main/{foundation_notebook_path(lab, language)}"
+    )
+
+
 def build_table(course: list[dict], language: str) -> str:
     if language == "zh":
         header = "| ID | 文章 | 日期 | Notebook | Colab | 运行层级 | 你会做什么 |\n|---|---|---|---|---|---|---|"
@@ -42,9 +57,57 @@ def build_table(course: list[dict], language: str) -> str:
     return "\n".join([header, *rows])
 
 
-def replace_block(text: str, rendered: str) -> str:
-    start = "<!-- COURSE_TABLE:START -->"
-    end = "<!-- COURSE_TABLE:END -->"
+def build_foundation_table(foundations: list[dict], language: str) -> str:
+    if language == "zh":
+        header = "| ID | 基础 Lab | Notebook | Colab | 运行层级 | 你会补齐什么 |\n|---|---|---|---|---|---|"
+        rows = [
+            f"| `{lab['id']}` | {lab['title_zh']} | [打开]({foundation_notebook_path(lab, 'zh')}) | [Colab]({foundation_colab_url(lab, 'zh')}) | `{lab['runnable_tier']}` | {lab['summary_zh']} |"
+            for lab in foundations
+        ]
+    else:
+        header = "| ID | Foundation Lab | Notebook | Colab | Runnable tier | What it repairs |\n|---|---|---|---|---|---|"
+        rows = [
+            f"| `{lab['id']}` | {lab['title_en']} | [Open]({foundation_notebook_path(lab, 'en')}) | [Colab]({foundation_colab_url(lab, 'en')}) | `{lab['runnable_tier']}` | {lab['summary_en']} |"
+            for lab in foundations
+        ]
+    return "\n".join([header, *rows])
+
+
+def build_reference_table(items: list[dict], language: str) -> str:
+    if language == "zh":
+        header = "| ID | 参考输出 | 文件 | 什么时候用 |\n|---|---|---|---|"
+        rows = [
+            f"| `{item['id']}` | {item['title_zh']} | [{item['path_zh']}]({item['path_zh']}) | {item['best_for_zh']} |"
+            for item in items
+        ]
+    else:
+        header = "| ID | Reference Output | File | When to use it |\n|---|---|---|---|"
+        rows = [
+            f"| `{item['id']}` | {item['title_en']} | [{item['path_en']}]({item['path_en']}) | {item['best_for_en']} |"
+            for item in items
+        ]
+    return "\n".join([header, *rows])
+
+
+def build_extension_table(items: list[dict], language: str) -> str:
+    if language == "zh":
+        header = "| ID | 扩展论文 | 链接 | 为什么现在读 | 你要交什么 |\n|---|---|---|---|---|"
+        rows = [
+            f"| `{item['id']}` | {item['title_zh']} | [原文]({item['source_url']}) | {item['why_now_zh']} | {item['assignment_zh']} |"
+            for item in items
+        ]
+    else:
+        header = "| ID | Extension Paper | Link | Why now | What to ship |\n|---|---|---|---|---|"
+        rows = [
+            f"| `{item['id']}` | {item['title_en']} | [Source]({item['source_url']}) | {item['why_now_en']} | {item['assignment_en']} |"
+            for item in items
+        ]
+    return "\n".join([header, *rows])
+
+
+def replace_block(text: str, rendered: str, block_name: str) -> str:
+    start = f"<!-- {block_name}:START -->"
+    end = f"<!-- {block_name}:END -->"
     before, remainder = text.split(start, maxsplit=1)
     _, after = remainder.split(end, maxsplit=1)
     return f"{before}{start}\n{rendered}\n{end}{after}"
@@ -52,9 +115,15 @@ def replace_block(text: str, rendered: str) -> str:
 
 def main() -> None:
     course = json.loads(COURSE_PATH.read_text())
+    foundations = json.loads(FOUNDATIONS_PATH.read_text())
+    reference_outputs = json.loads(REFERENCE_OUTPUTS_PATH.read_text())
+    extensions = json.loads(EXTENSIONS_PATH.read_text())
     for language, path in README_PATHS.items():
-        rendered = build_table(course, language)
-        updated = replace_block(path.read_text(), rendered)
+        updated = path.read_text()
+        updated = replace_block(updated, build_foundation_table(foundations, language), "FOUNDATION_TABLE")
+        updated = replace_block(updated, build_table(course, language), "COURSE_TABLE")
+        updated = replace_block(updated, build_reference_table(reference_outputs, language), "REFERENCE_TABLE")
+        updated = replace_block(updated, build_extension_table(extensions, language), "EXTENSION_TABLE")
         path.write_text(updated)
         print(f"updated {path.relative_to(ROOT)}")
 

@@ -39,7 +39,7 @@ To avoid treating every reader as if they start from the same place, the reposit
 
 - For readers who are still below an Alibaba-style `P4` starting state.
 - Start here if you still cannot run notebooks reliably, read basic plots comfortably, or explain what a baseline is.
-- Finish `M00` and `M01` first, and make the reading-note plus experiment-log templates feel routine.
+- Finish `F00-F03` plus `M00` and `M01` first, and make the reading-note plus experiment-log templates feel routine.
 - The first goal is not immediate research output; it is reaching something close to `P4`.
 
 ### Prepared Runway
@@ -48,6 +48,12 @@ To avoid treating every reader as if they start from the same place, the reposit
 - Start here if you already have some experiment and reading ability but still lack a systematic interpretability path.
 - Move more quickly through `M00 → M05`, then enter research-ready mode early.
 - The target is to move directly toward `P5`, with strong completers beginning to touch `P6`.
+
+## Three new support layers now sit underneath this path
+
+- `Pre-P4 foundations`: repair environment setup, attention-shape intuition, vector geometry, and experiment discipline.
+- `Reference-output layer`: calibrate the density of your memos, briefs, experiment logs, and proposals against examples.
+- `Advanced extension track`: add transformer-circuits, IOI, and auditing breadth after the Anthropic core line.
 
 ## What changes when you switch from "course mode" to "research mode"
 
@@ -72,6 +78,10 @@ If you cannot point to these outputs, you are probably still browsing rather tha
 - Review weekly, not only at the end.
 
 These rules matter because beginners tend to over-interpret pretty plots and under-document failure.
+
+## How to continue after the bootcamp
+
+When the core path and the bootcamp end, do not stop at "I completed the course." The next move is to widen your research language with the extension track and keep calibrating your deliverables against the reference examples.
 
 ## Exit portfolio
 

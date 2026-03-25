@@ -2,7 +2,7 @@
 
 ## 目标
 
-把 feature 风格的思路接到 character trait 上，把 persona 看成表示空间中的方向。
+先在本地恢复一个教学版 persona direction，再把 feature 风格的思路接到 character trait 上，把 persona 看成表示空间中的方向。
 
 ## 核心参考
 
@@ -18,6 +18,7 @@
 
 - Notebook：`notebooks/zh/m08_persona_vectors.ipynb`
 - 共享 artifact：`artifacts/m08_persona_vectors.json`
+- notebook 现在会先恢复一个 toy persona direction，再与共享 artifact 对照。
 
 ## 验收题
 
@@ -27,4 +28,4 @@
 
 ## 模块结论
 
-一旦表示方向开始具有行为意义，interpretability 就会碰到模型 character。
+一旦表示方向开始具有行为意义，interpretability 就会碰到模型 character；而 notebook 现在会让你先亲手恢复一个小方向，再去看共享图里的更丰富现象。

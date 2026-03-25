@@ -142,8 +142,8 @@
     "order": 6,
     "title_zh": "Tracing the Thoughts",
     "title_en": "Tracing the Thoughts of a Large Language Model",
-    "summary_zh": "用预计算 attribution graph 学会阅读一条局部计算路径。",
-    "summary_en": "Use a precomputed attribution graph to read a local computation path.",
+    "summary_zh": "先在本地跑一个 toy tracing 复现，再用共享 attribution graph 学会阅读一条局部计算路径。",
+    "summary_en": "Run a toy tracing reproduction locally, then use a shared attribution graph to read a local computation path.",
     "prereqs": [
       "M03",
       "M05"
@@ -159,7 +159,7 @@
       "concept-graph",
       "m06-attribution-graph"
     ],
-    "runnable_tier": "artifact-guided",
+    "runnable_tier": "cpu-colab",
     "web_slug": "tracing-thoughts"
   },
   {
@@ -192,8 +192,8 @@
     "order": 8,
     "title_zh": "Persona Vectors",
     "title_en": "Persona Vectors",
-    "summary_zh": "通过 persona vector 的前后对比，理解 character trait 如何被表示成方向。",
-    "summary_en": "Use before/after persona-vector comparisons to study character traits as directions.",
+    "summary_zh": "先在本地构造一个教学版 persona direction，再用共享 artifact 对比 trait 前后变化。",
+    "summary_en": "Construct a teaching-scale persona direction locally, then use a shared artifact to compare before/after trait shifts.",
     "prereqs": [
       "M05"
     ],
@@ -208,7 +208,7 @@
       "concept-graph",
       "m08-persona-vectors"
     ],
-    "runnable_tier": "artifact-guided",
+    "runnable_tier": "cpu-colab",
     "web_slug": "persona-vectors"
   },
   {

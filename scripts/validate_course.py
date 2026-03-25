@@ -9,11 +9,15 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 COURSE_PATH = ROOT / "content" / "course.json"
 PROGRAM_PATH = ROOT / "content" / "program.json"
+FOUNDATIONS_PATH = ROOT / "content" / "foundations.json"
+REFERENCE_OUTPUTS_PATH = ROOT / "content" / "reference_outputs.json"
+EXTENSIONS_PATH = ROOT / "content" / "extensions.json"
 SELF_CHECKS_PATH = ROOT / "content" / "self_checks.json"
 ARTIFACTS_PATH = ROOT / "artifacts" / "manifest.json"
 DOCS_ROOT = ROOT / "docs"
 NOTEBOOKS_ROOT = ROOT / "notebooks"
 TEMPLATES_ROOT = ROOT / "templates"
+EXAMPLES_ROOT = ROOT / "examples"
 
 REQUIRED_FIELDS = {
     "id",
@@ -52,6 +56,8 @@ EXPECTED_PROGRAM_DOCS = {
     "research-playbook.md",
     "evaluation-rubric.md",
     "company-onramp.md",
+    "reference-outputs.md",
+    "advanced-extensions.md",
 }
 
 EXPECTED_TEMPLATE_FILES = {
@@ -61,6 +67,49 @@ EXPECTED_TEMPLATE_FILES = {
     "experiment_log_zh.md",
     "research_memo_en.md",
     "research_memo_zh.md",
+}
+
+FOUNDATION_REQUIRED_FIELDS = {
+    "id",
+    "order",
+    "title_zh",
+    "title_en",
+    "summary_zh",
+    "summary_en",
+    "prereqs",
+    "skills_zh",
+    "skills_en",
+    "deliverables_zh",
+    "deliverables_en",
+    "questions_zh",
+    "questions_en",
+    "runnable_tier",
+    "web_slug",
+}
+
+REFERENCE_OUTPUT_REQUIRED_FIELDS = {
+    "id",
+    "title_zh",
+    "title_en",
+    "summary_zh",
+    "summary_en",
+    "path_zh",
+    "path_en",
+    "best_for_zh",
+    "best_for_en",
+}
+
+EXTENSION_REQUIRED_FIELDS = {
+    "id",
+    "title_zh",
+    "title_en",
+    "source_url",
+    "summary_zh",
+    "summary_en",
+    "why_now_zh",
+    "why_now_en",
+    "assignment_zh",
+    "assignment_en",
 }
 
 
@@ -73,9 +122,31 @@ def assert_exists(path: Path, message: str) -> None:
         fail(message)
 
 
+def markdown_shape(path: Path) -> list[str]:
+    shape = []
+    for raw_line in path.read_text().splitlines():
+        line = raw_line.strip()
+        if not line:
+            continue
+        if line.startswith("# "):
+            shape.append("h1")
+        elif line.startswith("## "):
+            shape.append("h2")
+        elif line.startswith("- "):
+            shape.append("bullet")
+        elif len(line) > 3 and line[0].isdigit() and line[1:3] == ". ":
+            shape.append("numbered")
+        else:
+            shape.append("text")
+    return shape
+
+
 def main() -> None:
     course = json.loads(COURSE_PATH.read_text())
     program = json.loads(PROGRAM_PATH.read_text())
+    foundations = json.loads(FOUNDATIONS_PATH.read_text())
+    reference_outputs = json.loads(REFERENCE_OUTPUTS_PATH.read_text())
+    extensions = json.loads(EXTENSIONS_PATH.read_text())
     self_checks = json.loads(SELF_CHECKS_PATH.read_text())
     artifacts = json.loads(ARTIFACTS_PATH.read_text())
 
@@ -97,6 +168,8 @@ def main() -> None:
     artifact_lookup = {artifact["id"]: artifact for artifact in artifacts}
     expected_docs = {"en": set(), "zh": set()}
     expected_notebooks = {"en": set(), "zh": set()}
+    expected_foundation_docs = {"en": set(), "zh": set()}
+    expected_foundation_notebooks = {"en": set(), "zh": set()}
 
     for artifact in artifacts:
         if "path" in artifact:
@@ -126,6 +199,51 @@ def main() -> None:
         expected_notebooks["en"].add(notebook_name)
         expected_notebooks["zh"].add(notebook_name)
 
+    if not isinstance(foundations, list) or not foundations:
+        fail("content/foundations.json must be a non-empty list")
+    foundation_ids = [foundation["id"] for foundation in foundations]
+    if len(foundation_ids) != len(set(foundation_ids)):
+        fail("foundation IDs must be unique")
+
+    for foundation in foundations:
+        missing = FOUNDATION_REQUIRED_FIELDS - set(foundation)
+        if missing:
+            fail(f"foundation {foundation.get('id', '<missing>')} is missing fields: {sorted(missing)}")
+        for prereq in foundation["prereqs"]:
+            if prereq not in foundation_ids:
+                fail(f"foundation {foundation['id']} references unknown prerequisite {prereq}")
+        for field in ("skills_zh", "skills_en", "deliverables_zh", "deliverables_en", "questions_zh", "questions_en"):
+            if len(foundation[field]) < 2:
+                fail(f"foundation {foundation['id']} field {field} must contain at least two entries")
+        doc_name = f"{foundation['id'].lower()}-{foundation['web_slug']}.md"
+        notebook_name = f"{foundation['id'].lower()}_{foundation['web_slug'].replace('-', '_')}.ipynb"
+        expected_foundation_docs["en"].add(doc_name)
+        expected_foundation_docs["zh"].add(doc_name)
+        expected_foundation_notebooks["en"].add(notebook_name)
+        expected_foundation_notebooks["zh"].add(notebook_name)
+
+    if not isinstance(reference_outputs, list) or not reference_outputs:
+        fail("content/reference_outputs.json must be a non-empty list")
+    reference_ids = [entry["id"] for entry in reference_outputs]
+    if len(reference_ids) != len(set(reference_ids)):
+        fail("reference output IDs must be unique")
+    for entry in reference_outputs:
+        missing = REFERENCE_OUTPUT_REQUIRED_FIELDS - set(entry)
+        if missing:
+            fail(f"reference output {entry.get('id', '<missing>')} missing fields: {sorted(missing)}")
+        assert_exists(ROOT / entry["path_zh"], f"missing zh reference output file: {entry['path_zh']}")
+        assert_exists(ROOT / entry["path_en"], f"missing en reference output file: {entry['path_en']}")
+
+    if not isinstance(extensions, list) or not extensions:
+        fail("content/extensions.json must be a non-empty list")
+    extension_ids = [entry["id"] for entry in extensions]
+    if len(extension_ids) != len(set(extension_ids)):
+        fail("extension IDs must be unique")
+    for entry in extensions:
+        missing = EXTENSION_REQUIRED_FIELDS - set(entry)
+        if missing:
+            fail(f"extension {entry.get('id', '<missing>')} missing fields: {sorted(missing)}")
+
     missing_program = PROGRAM_REQUIRED_FIELDS - set(program)
     if missing_program:
         fail(f"content/program.json is missing fields: {sorted(missing_program)}")
@@ -135,6 +253,8 @@ def main() -> None:
     phase_ids = [phase["id"] for phase in program["phases"]]
     if len(phase_ids) != len(set(phase_ids)):
         fail("program phase IDs must be unique")
+    if not all(phase_id.startswith("S") for phase_id in phase_ids):
+        fail("program phase IDs must use the internal Stage naming such as S0")
 
     week_ids = [week["id"] for week in program["weeks"]]
     if len(week_ids) != len(set(week_ids)):
@@ -196,9 +316,44 @@ def main() -> None:
                 f"{language} notebook set mismatch. expected={sorted(expected_notebooks[language])}, actual={sorted(actual_notebooks)}"
             )
 
+        foundations_index = DOCS_ROOT / language / "foundations" / "index.md"
+        assert_exists(foundations_index, f"missing foundations index for {language}")
+        foundations_dir = DOCS_ROOT / language / "foundations"
+        actual_foundation_docs = {path.name for path in foundations_dir.glob("f*.md")}
+        if actual_foundation_docs != expected_foundation_docs[language]:
+            fail(
+                f"{language} foundation docs mismatch. expected={sorted(expected_foundation_docs[language])}, actual={sorted(actual_foundation_docs)}"
+            )
+
+        foundation_notebooks_dir = NOTEBOOKS_ROOT / "foundations" / language
+        actual_foundation_notebooks = {path.name for path in foundation_notebooks_dir.glob("f*.ipynb")}
+        if actual_foundation_notebooks != expected_foundation_notebooks[language]:
+            fail(
+                f"{language} foundation notebooks mismatch. expected={sorted(expected_foundation_notebooks[language])}, actual={sorted(actual_foundation_notebooks)}"
+            )
+
+    for module in course:
+        zh_path = DOCS_ROOT / "zh" / "modules" / f"{module['id'].lower()}-{module['web_slug']}.md"
+        en_path = DOCS_ROOT / "en" / "modules" / f"{module['id'].lower()}-{module['web_slug']}.md"
+        if markdown_shape(zh_path) != markdown_shape(en_path):
+            fail(f"module markdown structure mismatch for {module['id']}")
+
+    for foundation in foundations:
+        zh_path = DOCS_ROOT / "zh" / "foundations" / f"{foundation['id'].lower()}-{foundation['web_slug']}.md"
+        en_path = DOCS_ROOT / "en" / "foundations" / f"{foundation['id'].lower()}-{foundation['web_slug']}.md"
+        if markdown_shape(zh_path) != markdown_shape(en_path):
+            fail(f"foundation markdown structure mismatch for {foundation['id']}")
+
+    for entry in reference_outputs:
+        zh_path = ROOT / entry["path_zh"]
+        en_path = ROOT / entry["path_en"]
+        if markdown_shape(zh_path) != markdown_shape(en_path):
+            fail(f"reference output markdown structure mismatch for {entry['id']}")
+
     print(
-        f"validated {len(course)} article notebooks, {len(artifacts)} artifacts, "
-        f"and {len(program['weeks'])} research-ready weeks"
+        f"validated {len(course)} article notebooks, {len(foundations)} foundation labs, "
+        f"{len(reference_outputs)} reference outputs, {len(extensions)} extension papers, "
+        f"{len(artifacts)} artifacts, and {len(program['weeks'])} research-ready weeks"
     )
 
 

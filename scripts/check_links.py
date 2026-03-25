@@ -11,6 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 COURSE_PATH = ROOT / "content" / "course.json"
+EXTENSIONS_PATH = ROOT / "content" / "extensions.json"
 EXTRA_LINKS = [
     "https://github.com/Jonny-English/circuits-zoom-in-fresh-20260325",
     "https://github.com/shareAI-lab/learn-claude-code",
@@ -35,10 +36,13 @@ def check_url(url: str) -> tuple[bool, str]:
 
 def main() -> None:
     course = json.loads(COURSE_PATH.read_text())
+    extensions = json.loads(EXTENSIONS_PATH.read_text())
     urls = []
     for module in course:
         for paper in module["paper_refs"]:
             urls.append(paper["url"])
+    for item in extensions:
+        urls.append(item["source_url"])
     urls.extend(EXTRA_LINKS)
     seen = []
     for url in urls:

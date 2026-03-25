@@ -7,6 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 COURSE_PATH = ROOT / "content" / "course.json"
+FOUNDATIONS_PATH = ROOT / "content" / "foundations.json"
 SELF_CHECKS_PATH = ROOT / "content" / "self_checks.json"
 OUTPUT_ROOT = ROOT / "notebooks"
 
@@ -432,6 +433,8 @@ SELF_CHECKS = {
     entry["module_id"]: entry
     for entry in json.loads(SELF_CHECKS_PATH.read_text())
 }
+FOUNDATIONS = json.loads(FOUNDATIONS_PATH.read_text())
+FOUNDATION_LOOKUP = {entry["id"]: entry for entry in FOUNDATIONS}
 
 
 def bullet_block(heading: str, items: list[str]) -> str:
@@ -472,6 +475,325 @@ def self_check_cells(module_id: str, language: str) -> list[dict]:
         else "如果你不能在不重看讲义的情况下独立答出其中至少 2 题，就回去重看文章和你的书面输出。"
     )
     return [markdown_cell(bullet_block(title, questions + [pass_line]))]
+
+
+def foundation_context_cells(foundation_id: str, language: str) -> list[dict]:
+    lab = FOUNDATION_LOOKUP[foundation_id]
+    skills = lab["skills_en"] if language == "en" else lab["skills_zh"]
+    deliverables = lab["deliverables_en"] if language == "en" else lab["deliverables_zh"]
+    intro = (
+        "## What this foundation lab is for\n\n"
+        "This lab exists to reduce the most common beginner failure modes before the article-first path starts."
+        if language == "en"
+        else "## 这个基础 lab 是为了解决什么\n\n这本 lab 用来消除最常见的小白阻塞项，再进入文章优先主线。"
+    )
+    skill_heading = "## Skills you should leave with" if language == "en" else "## 做完后你应该带走的技能"
+    ship_heading = "## Ship these outputs" if language == "en" else "## 最后交付这些产物"
+    return [
+        markdown_cell(intro),
+        markdown_cell(bullet_block(skill_heading, skills)),
+        markdown_cell(bullet_block(ship_heading, deliverables)),
+    ]
+
+
+def foundation_self_check_cells(foundation_id: str, language: str) -> list[dict]:
+    lab = FOUNDATION_LOOKUP[foundation_id]
+    questions = lab["questions_en"] if language == "en" else lab["questions_zh"]
+    heading = "## Self-check questions" if language == "en" else "## 验收题"
+    pass_line = (
+        "If you cannot answer at least two questions without reopening the notebook, stay here before moving to the article track."
+        if language == "en"
+        else "如果你不能在不重开 notebook 的情况下独立答出至少 2 题，就先不要进入文章主线。"
+    )
+    return [markdown_cell(bullet_block(heading, questions + [pass_line]))]
+
+
+def f00(language: str) -> list[dict]:
+    intro = """
+# F00 Environment, Plots, and Baseline Discipline
+""" if language == "en" else """
+# F00 环境、图表与基线纪律
+"""
+    code = repo_root_snippet() + """
+import matplotlib.pyplot as plt
+import torch
+from torch import nn
+
+torch.manual_seed(7)
+features = torch.randn(256, 2)
+true_weights = torch.tensor([1.8, -1.1])
+logits = features @ true_weights + 0.25 * torch.randn(256)
+labels = (logits > 0).float().unsqueeze(1)
+train_x, val_x = features[:192], features[192:]
+train_y, val_y = labels[:192], labels[192:]
+
+
+def train_run(weight_decay: float, seed: int):
+    torch.manual_seed(seed)
+    model = nn.Linear(2, 1)
+    optimizer = torch.optim.SGD(model.parameters(), lr=0.25, weight_decay=weight_decay)
+    loss_fn = nn.BCEWithLogitsLoss()
+    train_losses, val_losses = [], []
+    for _ in range(60):
+        optimizer.zero_grad()
+        train_logits = model(train_x)
+        train_loss = loss_fn(train_logits, train_y)
+        train_loss.backward()
+        optimizer.step()
+        with torch.no_grad():
+            val_logits = model(val_x)
+            val_loss = loss_fn(val_logits, val_y)
+        train_losses.append(float(train_loss.detach()))
+        val_losses.append(float(val_loss.detach()))
+    with torch.no_grad():
+        val_pred = (torch.sigmoid(model(val_x)) > 0.5).float()
+        val_acc = float((val_pred.eq(val_y)).float().mean())
+    return train_losses, val_losses, val_acc
+
+
+baseline = train_run(weight_decay=0.0, seed=11)
+variant = train_run(weight_decay=0.08, seed=11)
+
+fig, axes = plt.subplots(1, 2, figsize=(11, 4))
+axes[0].plot(baseline[0], label="baseline train", color="#1f5f8b")
+axes[0].plot(baseline[1], label="baseline val", color="#1f5f8b", linestyle="--")
+axes[0].plot(variant[0], label="variant train", color="#c96a28")
+axes[0].plot(variant[1], label="variant val", color="#c96a28", linestyle="--")
+axes[0].set_title("Loss curves")
+axes[0].set_xlabel("epoch")
+axes[0].legend()
+
+axes[1].bar(["baseline", "variant"], [baseline[2], variant[2]], color=["#1f5f8b", "#c96a28"])
+axes[1].set_ylim(0.7, 1.0)
+axes[1].set_title("Validation accuracy")
+plt.tight_layout()
+
+print("Baseline val accuracy:", round(baseline[2], 3))
+print("Variant val accuracy:", round(variant[2], 3))
+print("Judgment call: the variant changes regularization, so the baseline/variant pair is legible.")
+"""
+    takeaway = """
+## Takeaway
+
+Research starts when your runs stay distinct in writing: baseline, variant, metrics, and judgment call.
+""" if language == "en" else """
+## 小结
+
+真正的研究起点，不是“能跑”，而是 baseline、variant、指标和 judgment call 都能在写作里分开。
+"""
+    return [markdown_cell(intro), *foundation_context_cells("F00", language), code_cell(code), markdown_cell(takeaway)]
+
+
+def f01(language: str) -> list[dict]:
+    intro = """
+# F01 Transformer Shapes and Attention Reading
+""" if language == "en" else """
+# F01 Transformer 形状与注意力读图
+"""
+    code = repo_root_snippet() + """
+import math
+import matplotlib.pyplot as plt
+import numpy as np
+
+tokens = ["Ada", "wrote", "the", "patch", "carefully"]
+embeddings = np.array([
+    [1.0, 0.1, 0.3],
+    [0.8, 0.4, 0.2],
+    [0.2, 0.9, 0.1],
+    [0.7, 0.3, 0.9],
+    [0.9, 0.2, 0.8],
+])
+Wq = np.array([[1.0, 0.2], [0.1, 0.9], [0.7, 0.3]])
+Wk = np.array([[0.9, 0.1], [0.2, 1.0], [0.6, 0.4]])
+Wv = np.array([[0.4, 0.8], [0.9, 0.3], [0.3, 0.7]])
+
+Q = embeddings @ Wq
+K = embeddings @ Wk
+V = embeddings @ Wv
+scores = Q @ K.T / math.sqrt(K.shape[-1])
+scores = scores - scores.max(axis=-1, keepdims=True)
+weights = np.exp(scores)
+weights = weights / weights.sum(axis=-1, keepdims=True)
+contexts = weights @ V
+residual_after = np.concatenate([embeddings[:, :2] + contexts, embeddings[:, 2:]], axis=-1)
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+im = axes[0].imshow(weights, cmap="Blues")
+axes[0].set_xticks(range(len(tokens)), tokens, rotation=30)
+axes[0].set_yticks(range(len(tokens)), tokens)
+axes[0].set_title("Attention weights")
+plt.colorbar(im, ax=axes[0], fraction=0.046)
+
+axes[1].plot(residual_after[-1], marker="o", color="#c96a28")
+axes[1].set_title("Final-token residual update")
+axes[1].set_xlabel("channel")
+plt.tight_layout()
+
+print("Q shape:", Q.shape, "| K shape:", K.shape, "| V shape:", V.shape)
+print("Most attended token for the final position:", tokens[int(weights[-1].argmax())])
+print("Final-position context vector:", np.round(contexts[-1], 3))
+"""
+    takeaway = """
+## Takeaway
+
+Before you can read circuits, you need to read shapes, attention matrices, and residual updates without hand-waving.
+""" if language == "en" else """
+## 小结
+
+在你能读 circuit 之前，先要能不糊弄地读懂形状、attention 矩阵和 residual update。
+"""
+    return [markdown_cell(intro), *foundation_context_cells("F01", language), code_cell(code), markdown_cell(takeaway)]
+
+
+def f02(language: str) -> list[dict]:
+    intro = """
+# F02 Vector Geometry, Features, and Probes
+""" if language == "en" else """
+# F02 向量几何、特征与探针
+"""
+    code = repo_root_snippet() + """
+import matplotlib.pyplot as plt
+import numpy as np
+
+feature_truth = np.array([1.0, 0.25])
+feature_spurious = np.array([0.65, 0.76])
+feature_truth = feature_truth / np.linalg.norm(feature_truth)
+feature_spurious = feature_spurious / np.linalg.norm(feature_spurious)
+
+rng = np.random.default_rng(5)
+positive = rng.normal(loc=[1.2, 0.5], scale=[0.22, 0.18], size=(18, 2))
+negative = rng.normal(loc=[-0.9, -0.2], scale=[0.25, 0.2], size=(18, 2))
+points = np.vstack([positive, negative])
+labels = np.concatenate([np.ones(len(positive)), np.zeros(len(negative))])
+
+centered_labels = labels * 2 - 1
+probe = np.linalg.lstsq(points, centered_labels, rcond=None)[0]
+probe = probe / np.linalg.norm(probe)
+
+def cosine(a, b):
+    return float(np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b)))
+
+fig, ax = plt.subplots(figsize=(6, 6))
+ax.scatter(positive[:, 0], positive[:, 1], color="#1f5f8b", label="positive")
+ax.scatter(negative[:, 0], negative[:, 1], color="#c96a28", label="negative")
+for vector, color, label in [
+    (feature_truth, "#0f3d5e", "feature_truth"),
+    (feature_spurious, "#8b5e34", "feature_spurious"),
+    (probe, "#2d6a4f", "probe"),
+]:
+    ax.arrow(0, 0, vector[0], vector[1], width=0.02, color=color, length_includes_head=True)
+    ax.text(vector[0] * 1.08, vector[1] * 1.08, label)
+ax.axhline(0, color="0.85")
+ax.axvline(0, color="0.85")
+ax.set_title("Directions, projections, and a probe")
+ax.legend()
+ax.set_aspect("equal")
+plt.tight_layout()
+
+print("cos(feature_truth, probe) =", round(cosine(feature_truth, probe), 3))
+print("cos(feature_spurious, probe) =", round(cosine(feature_spurious, probe), 3))
+print("Average positive projection onto probe:", round(float((positive @ probe).mean()), 3))
+print("Average negative projection onto probe:", round(float((negative @ probe).mean()), 3))
+"""
+    takeaway = """
+## Takeaway
+
+Once you see features as directions, probes become geometry plus supervision rather than mysterious semantic magic.
+""" if language == "en" else """
+## 小结
+
+一旦把 feature 看成方向，probe 就不再像语义魔法，而更像“几何 + 监督信号”。
+"""
+    return [markdown_cell(intro), *foundation_context_cells("F02", language), code_cell(code), markdown_cell(takeaway)]
+
+
+def f03(language: str) -> list[dict]:
+    intro = """
+# F03 Sweeps, Ablations, and Failure Analysis
+""" if language == "en" else """
+# F03 Sweep、Ablation 与 Failure Analysis
+"""
+    code = repo_root_snippet() + """
+import matplotlib.pyplot as plt
+import torch
+from torch import nn
+
+torch.manual_seed(19)
+train_x = torch.randn(320, 3)
+train_signal = 1.3 * train_x[:, 0] - 0.9 * train_x[:, 1]
+train_x[:, 2] = 0.8 * (train_signal > 0).float() + 0.2 * torch.randn(320)
+train_y = (train_signal > 0).float().unsqueeze(1)
+
+ood_x = torch.randn(160, 3)
+ood_signal = 1.3 * ood_x[:, 0] - 0.9 * ood_x[:, 1]
+ood_x[:, 2] = 0.8 * (ood_signal < 0).float() + 0.2 * torch.randn(160)
+ood_y = (ood_signal > 0).float().unsqueeze(1)
+
+
+def train_model(weight_decay: float):
+    torch.manual_seed(31)
+    model = nn.Linear(3, 1)
+    optimizer = torch.optim.Adam(model.parameters(), lr=0.08, weight_decay=weight_decay)
+    loss_fn = nn.BCEWithLogitsLoss()
+    for _ in range(120):
+        optimizer.zero_grad()
+        loss = loss_fn(model(train_x), train_y)
+        loss.backward()
+        optimizer.step()
+    with torch.no_grad():
+        train_acc = float(((torch.sigmoid(model(train_x)) > 0.5).float().eq(train_y)).float().mean())
+        ood_acc = float(((torch.sigmoid(model(ood_x)) > 0.5).float().eq(ood_y)).float().mean())
+        weights = model.weight.detach().clone().squeeze(0)
+        bias = float(model.bias.detach().clone().squeeze(0))
+    return train_acc, ood_acc, weights, bias
+
+
+def evaluate_ablation(weights: torch.Tensor, bias: float):
+    ablated_x = ood_x.clone()
+    ablated_x[:, 2] = 0.0
+    logits = ablated_x @ weights[:3] + bias
+    preds = (torch.sigmoid(logits.unsqueeze(1)) > 0.5).float()
+    return float(preds.eq(ood_y).float().mean())
+
+
+weight_decays = [0.0, 0.001, 0.01, 0.05, 0.1]
+records = []
+for wd in weight_decays:
+    train_acc, ood_acc, weights, bias = train_model(wd)
+    ablated_acc = evaluate_ablation(weights, bias)
+    records.append((wd, train_acc, ood_acc, ablated_acc, float(weights[2])))
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+positions = list(range(len(weight_decays)))
+axes[0].plot(positions, [row[1] for row in records], marker="o", label="train")
+axes[0].plot(positions, [row[2] for row in records], marker="o", label="OOD")
+axes[0].plot(positions, [row[3] for row in records], marker="o", label="OOD after ablation")
+axes[0].set_title("Sweep over weight decay")
+axes[0].set_xlabel("weight decay")
+axes[0].set_xticks(positions, [str(value) for value in weight_decays], rotation=25)
+axes[0].legend()
+
+axes[1].bar([str(row[0]) for row in records], [row[4] for row in records], color="#c96a28")
+axes[1].set_title("Weight placed on the spurious feature")
+axes[1].set_xlabel("weight decay")
+plt.tight_layout()
+
+for wd, train_acc, ood_acc, ablated_acc, spurious_weight in records:
+    print(
+        f"wd={wd:>5} | train={train_acc:.3f} | OOD={ood_acc:.3f} | "
+        f"OOD after ablation={ablated_acc:.3f} | spurious weight={spurious_weight:.3f}"
+    )
+"""
+    takeaway = """
+## Takeaway
+
+The point of a sweep is not to produce many numbers. The point is to locate where your interpretation breaks or becomes robust.
+""" if language == "en" else """
+## 小结
+
+sweep 的重点不是多跑几个数字，而是找到你的解释从哪里开始失效，或者从哪里开始变稳。
+"""
+    return [markdown_cell(intro), *foundation_context_cells("F03", language), code_cell(code), markdown_cell(takeaway)]
 
 
 def m00(language: str) -> list[dict]:
@@ -859,57 +1181,100 @@ def m06(language: str) -> list[dict]:
 # M06 Tracing the Thoughts
 """
     context = """
-## Read a local attribution graph
+## Build a toy trace, then compare it to a shared graph
 
-Load a teaching artifact and inspect which paths contribute most strongly to the final answer.
+Construct a tiny computation path locally, inspect which edges carry the answer, and then compare that pattern to the shared teaching artifact.
 """ if language == "en" else """
-## 阅读一张局部 attribution graph
+## 先构造一个 toy trace，再对照共享图
 
-加载教学 artifact，检查哪些路径对最终答案的贡献最大。
+先在本地构造一条极小计算路径，检查哪些边真正把答案送出来，再拿它和共享教学图对照。
 """
     code = repo_root_snippet() + """
 import json
+import math
 import matplotlib.pyplot as plt
+import numpy as np
 
-graph = json.loads((root / "artifacts" / "m06_attribution_graph.json").read_text())
-case = graph["cases"][0]
+tokens = ["Q", "3", "+", "4", "A"]
+embeddings = np.array([
+    [0.1, 0.0, 0.2],
+    [1.2, 0.1, 0.0],
+    [0.0, 0.2, 0.1],
+    [0.9, 0.0, 0.2],
+    [0.7, 0.4, 1.0],
+])
+Wq = np.array([[0.2, 0.7], [0.9, 0.1], [0.5, 0.6]])
+Wk = np.array([[0.6, 0.3], [0.7, 0.2], [0.4, 0.8]])
+Q = embeddings @ Wq
+K = embeddings @ Wk
+scores = Q[-1] @ K.T / math.sqrt(K.shape[-1])
+weights = np.exp(scores - scores.max())
+weights = weights / weights.sum()
 
-fig, ax = plt.subplots(figsize=(10, 4))
-for edge in case["edges"]:
-    source = next(node for node in case["nodes"] if node["id"] == edge["source"])
-    target = next(node for node in case["nodes"] if node["id"] == edge["target"])
-    ax.plot(
-        [source["x"], target["x"]],
-        [source["y"], target["y"]],
-        linewidth=2 + 4 * edge["score"],
-        color="#c96a28",
-        alpha=0.65,
-    )
+number_values = np.array([0.0, 3.0, 0.0, 4.0, 0.0])
+readout_weights = np.array([0.0, 1.0, 0.0, 1.0, 0.0])
+token_contrib = weights * number_values * readout_weights
+feature_scores = {
+    "retrieve_left": token_contrib[1],
+    "retrieve_right": token_contrib[3],
+}
+compose_score = sum(feature_scores.values())
+toy_edges = [
+    ("3", "retrieve_left", feature_scores["retrieve_left"]),
+    ("4", "retrieve_right", feature_scores["retrieve_right"]),
+    ("retrieve_left", "compose_sum", feature_scores["retrieve_left"]),
+    ("retrieve_right", "compose_sum", feature_scores["retrieve_right"]),
+    ("compose_sum", "answer=7", compose_score),
+]
 
-for node in case["nodes"]:
-    color = "#123b63" if node["kind"] == "feature" else "#b5893a"
-    ax.scatter(node["x"], node["y"], s=700, color=color)
-    ax.text(node["x"], node["y"], node["label_en"], ha="center", va="center", color="white", fontsize=9)
+positions = {
+    "3": (0.15, 0.75),
+    "4": (0.15, 0.25),
+    "retrieve_left": (0.45, 0.75),
+    "retrieve_right": (0.45, 0.25),
+    "compose_sum": (0.72, 0.5),
+    "answer=7": (0.9, 0.5),
+}
 
-ax.set_title(case["title_en"])
-ax.set_xlim(0, 1)
-ax.set_ylim(0, 1)
-ax.axis("off")
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+for source, target, score in toy_edges:
+    x1, y1 = positions[source]
+    x2, y2 = positions[target]
+    axes[0].plot([x1, x2], [y1, y2], linewidth=2 + 6 * score, color="#c96a28", alpha=0.7)
+for node, (x, y) in positions.items():
+    color = "#123b63" if "retrieve" in node or "compose" in node else "#b5893a"
+    axes[0].scatter(x, y, s=700, color=color)
+    axes[0].text(x, y, node, ha="center", va="center", color="white", fontsize=8)
+axes[0].set_title("Toy computation path")
+axes[0].axis("off")
+
+artifact = json.loads((root / "artifacts" / "m06_attribution_graph.json").read_text())
+case = artifact["cases"][0]
+artifact_scores = sorted((edge["score"] for edge in case["edges"]), reverse=True)
+axes[1].bar(["left", "right", "sum"], [feature_scores["retrieve_left"], feature_scores["retrieve_right"], compose_score], color="#1f5f8b")
+axes[1].plot(range(len(artifact_scores)), artifact_scores, marker="o", color="#c96a28")
+axes[1].set_title("Toy scores vs artifact edge ordering")
+axes[1].set_xlabel("ordered artifact edges")
 plt.tight_layout()
 
-sorted_edges = sorted(case["edges"], key=lambda edge: edge["score"], reverse=True)
-print("Top contributions:")
-for edge in sorted_edges:
-    print(f"  {edge['source']} -> {edge['target']}: {edge['score']:.2f}")
+print("Answer-position attention:", dict(zip(tokens, np.round(weights, 3))))
+print("Toy path contributions:")
+for source, target, score in toy_edges:
+    print(f"  {source} -> {target}: {score:.3f}")
+
+ablated_left = compose_score - feature_scores["retrieve_left"]
+ablated_right = compose_score - feature_scores["retrieve_right"]
+print("Compose score after ablating left retrieval:", round(float(ablated_left), 3))
+print("Compose score after ablating right retrieval:", round(float(ablated_right), 3))
 """
     takeaway = """
 ## Takeaway
 
-Tracing is about finding a faithful slice of computation, not about dumping the whole network.
+Tracing becomes legible when you can move between a locally computed path and a larger shared attribution graph.
 """ if language == "en" else """
 ## 小结
 
-tracing 的重点是找出一块忠实的计算切片，而不是把整个网络都摊出来。
+当你能在“自己算出来的一条局部路径”和“更大的共享 attribution graph”之间来回切换时，tracing 才真正开始变得可读。
 """
     return [markdown_cell(intro), markdown_cell(context), code_cell(code), markdown_cell(takeaway)]
 
@@ -974,35 +1339,61 @@ def m08(language: str) -> list[dict]:
 # M08 Persona Vectors
 """
     context = """
-## Compare trait shifts
+## Recover a toy persona direction, then compare it to the shared artifact
 
-Load a small persona-vector artifact and compare trait scores before and after a light intervention.
+Construct a small persona direction from paired prompt embeddings, sweep the intervention strength, and then compare the result to the shared teaching artifact.
 """ if language == "en" else """
-## 比较 trait 的变化
+## 先恢复一个 toy persona direction，再对照共享 artifact
 
-加载一个小型 persona-vector artifact，比较轻量干预前后的 trait score。
+先用成对 prompt embedding 恢复一个小型 persona direction，扫一遍干预强度，再与共享教学 artifact 对照。
 """
     code = repo_root_snippet() + """
 import json
 import math
 import matplotlib.pyplot as plt
+import numpy as np
 
 payload = json.loads((root / "artifacts" / "m08_persona_vectors.json").read_text())
 traits = ["helpful", "cautious", "concise"]
 
-fig, axes = plt.subplots(1, len(payload["personas"]), figsize=(12, 4), sharey=True)
-for ax, persona in zip(axes, payload["personas"]):
-    before = [persona["scores_before"][trait] for trait in traits]
-    after = [persona["scores_after"][trait] for trait in traits]
-    x = range(len(traits))
-    ax.bar([index - 0.16 for index in x], before, width=0.32, label="before", color="#999999")
-    ax.bar([index + 0.16 for index in x], after, width=0.32, label="after", color="#1f5f8b")
-    ax.set_xticks(list(x))
-    ax.set_xticklabels(traits, rotation=20)
-    ax.set_ylim(0, 1)
-    ax.set_title(persona["label_en"])
+neutral = np.array([
+    [0.48, 0.44, 0.53],
+    [0.51, 0.41, 0.49],
+    [0.46, 0.47, 0.55],
+    [0.5, 0.43, 0.5],
+])
+mentor = neutral + np.array([0.18, 0.06, -0.03])
+reviewer = neutral + np.array([0.04, 0.22, 0.15])
 
+mentor_direction = (mentor - neutral).mean(axis=0)
+mentor_direction = mentor_direction / np.linalg.norm(mentor_direction)
+base_prompt = np.array([0.5, 0.4, 0.52])
+strengths = np.linspace(0.0, 1.4, 8)
+toy_scores = []
+for strength in strengths:
+    steered = base_prompt + strength * mentor_direction
+    toy_scores.append(np.clip(steered, 0.0, 1.0))
+toy_scores = np.array(toy_scores)
+
+fig, axes = plt.subplots(1, 2, figsize=(12, 4))
+for index, trait in enumerate(traits):
+    axes[0].plot(strengths, toy_scores[:, index], marker="o", label=trait)
+axes[0].set_title("Toy persona-direction sweep")
+axes[0].set_xlabel("steering strength")
+axes[0].set_ylim(0.0, 1.0)
 axes[0].legend()
+
+artifact_persona = payload["personas"][1]
+before = [artifact_persona["scores_before"][trait] for trait in traits]
+after = [artifact_persona["scores_after"][trait] for trait in traits]
+x = range(len(traits))
+axes[1].bar([index - 0.16 for index in x], before, width=0.32, label="before", color="#999999")
+axes[1].bar([index + 0.16 for index in x], after, width=0.32, label="after", color="#1f5f8b")
+axes[1].set_xticks(list(x))
+axes[1].set_xticklabels(traits, rotation=20)
+axes[1].set_ylim(0, 1)
+axes[1].set_title(artifact_persona["label_en"])
+axes[1].legend()
 plt.tight_layout()
 
 def cosine(values_a, values_b):
@@ -1014,15 +1405,19 @@ reference = payload["personas"][0]
 for persona in payload["personas"][1:]:
     score = cosine(reference["vector"], persona["vector"])
     print(f"cosine({reference['label_en']}, {persona['label_en']}) = {score:.3f}")
+
+artifact_vector = np.array(artifact_persona["vector"], dtype=float)
+print("cosine(toy mentor direction, artifact mentor vector) =", round(cosine(mentor_direction, artifact_vector[:3]), 3))
+print("Best toy strength by helpful-minus-concise tradeoff:", round(float(strengths[np.argmax(toy_scores[:, 0] - toy_scores[:, 2])]), 2))
 """
     takeaway = """
 ## Takeaway
 
-Persona vectors make character legible enough to compare, monitor, and lightly perturb.
+Persona vectors become more believable once you can recover a direction locally and then compare it to a richer shared artifact.
 """ if language == "en" else """
 ## 小结
 
-persona vector 让 character 变得足够可读，从而可以比较、监控和轻量干预。
+当你先在本地恢复一个方向，再去对照更丰富的共享 artifact 时，persona vector 这件事才更像“可操作机制”，而不只是好看的图。
 """
     return [markdown_cell(intro), markdown_cell(context), code_cell(code), markdown_cell(takeaway)]
 
@@ -1148,6 +1543,13 @@ NOTEBOOK_BUILDERS = {
     "M10": m10,
 }
 
+FOUNDATION_BUILDERS = {
+    "F00": f00,
+    "F01": f01,
+    "F02": f02,
+    "F03": f03,
+}
+
 
 def write_notebook(path: Path, cells: list[dict]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -1160,6 +1562,10 @@ def clean_generated_notebooks() -> None:
         language_root.mkdir(parents=True, exist_ok=True)
         for path in language_root.glob("m*.ipynb"):
             path.unlink()
+        foundations_root = OUTPUT_ROOT / "foundations" / language
+        foundations_root.mkdir(parents=True, exist_ok=True)
+        for path in foundations_root.glob("f*.ipynb"):
+            path.unlink()
 
 
 def main() -> None:
@@ -1171,6 +1577,14 @@ def main() -> None:
         for language in ("en", "zh"):
             path = OUTPUT_ROOT / language / filename
             cells = builder(language) + research_cells(module["id"], language) + self_check_cells(module["id"], language)
+            write_notebook(path, cells)
+            print(f"wrote {path.relative_to(ROOT)}")
+    for foundation in FOUNDATIONS:
+        builder = FOUNDATION_BUILDERS[foundation["id"]]
+        filename = f"{foundation['id'].lower()}_{foundation['web_slug'].replace('-', '_')}.ipynb"
+        for language in ("en", "zh"):
+            path = OUTPUT_ROOT / "foundations" / language / filename
+            cells = builder(language) + foundation_self_check_cells(foundation["id"], language)
             write_notebook(path, cells)
             print(f"wrote {path.relative_to(ROOT)}")
 

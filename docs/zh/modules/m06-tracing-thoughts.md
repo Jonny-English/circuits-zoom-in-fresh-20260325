@@ -2,7 +2,7 @@
 
 ## 目标
 
-教读者如何阅读一张局部 attribution graph，并解释一条从输入走到答案的计算路径。
+先在本地构造一条 toy tracing 路径，再学习如何阅读一张局部 attribution graph，并解释一条从输入走到答案的计算路径。
 
 ## 核心参考
 
@@ -18,6 +18,7 @@
 
 - Notebook：`notebooks/zh/m06_tracing_thoughts.ipynb`
 - 共享 artifact：`artifacts/m06_attribution_graph.json`
+- notebook 现在先跑一个本地 toy trace，再把结果和共享图对照。
 
 ## 验收题
 
@@ -27,4 +28,4 @@
 
 ## 模块结论
 
-这篇论文把焦点从孤立 feature 推进到局部计算图。
+这篇论文把焦点从孤立 feature 推进到局部计算图，而 notebook 则把“自己先算一条路径”放到了阅读共享图之前。

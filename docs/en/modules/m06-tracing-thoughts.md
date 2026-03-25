@@ -2,7 +2,7 @@
 
 ## Goal
 
-Teach readers how to read a local attribution graph and explain one computation path from input to answer.
+Start with one local toy tracing path, then teach readers how to read an attribution graph and explain one computation path from input to answer.
 
 ## Core reference
 
@@ -18,6 +18,7 @@ Teach readers how to read a local attribution graph and explain one computation 
 
 - Notebook: `notebooks/en/m06_tracing_thoughts.ipynb`
 - Shared artifact: `artifacts/m06_attribution_graph.json`
+- The notebook now runs a local toy trace first and then compares it to the shared graph.
 
 ## Self-check questions
 
@@ -27,4 +28,4 @@ Teach readers how to read a local attribution graph and explain one computation 
 
 ## Takeaway
 
-This paper shifts the focus from isolated features to local computation graphs.
+This paper shifts the focus from isolated features to local computation graphs, and the notebook now makes that shift concrete by asking the reader to compute one path before reading the shared graph.

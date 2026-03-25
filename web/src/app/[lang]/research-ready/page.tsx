@@ -1,4 +1,6 @@
-import { getProgram } from "@/lib/course";
+import Link from "next/link";
+
+import { getExtensions, getFoundations, getProgram, getReferenceOutputs } from "@/lib/course";
 
 export function generateStaticParams() {
   return [{ lang: "zh" }, { lang: "en" }];
@@ -11,9 +13,14 @@ export default async function ResearchReadyPage({
 }) {
   const { lang } = await params;
   const program = getProgram();
+  const foundations = getFoundations();
+  const referenceOutputs = getReferenceOutputs();
+  const extensions = getExtensions();
   const entryRequirements = lang === "zh" ? program.entry_requirements_zh : program.entry_requirements_en;
   const studyContract = lang === "zh" ? program.study_contract_zh : program.study_contract_en;
   const exitPortfolio = lang === "zh" ? program.exit_portfolio_zh : program.exit_portfolio_en;
+  const githubBlob = (relativePath: string) =>
+    `https://github.com/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/${relativePath}`;
 
   return (
     <main className="content-grid">
@@ -57,6 +64,30 @@ export default async function ResearchReadyPage({
               <p>{lang === "zh" ? "目标：" : "Target:"} {lang === "zh" ? track.target_zh : track.target_en}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="panel">
+        <div className="panel-header">
+          <div>
+            <p className="eyebrow">{lang === "zh" ? "Pre-P4 基础包" : "Pre-P4 foundations"}</p>
+            <h3>{lang === "zh" ? "两条起跑线之前的硬地基" : "The hard floor underneath both runways"}</h3>
+          </div>
+        </div>
+        <div className="cards">
+          {foundations.map((foundation) => (
+            <article className="module-card" key={foundation.id}>
+              <span className="module-id">{foundation.id}</span>
+              <strong>{lang === "zh" ? foundation.title_zh : foundation.title_en}</strong>
+              <p>{lang === "zh" ? foundation.summary_zh : foundation.summary_en}</p>
+              <p>{lang === "zh" ? "交付物：" : "Deliverables:"} {(lang === "zh" ? foundation.deliverables_zh : foundation.deliverables_en).join("；")}</p>
+            </article>
+          ))}
+        </div>
+        <div className="hero-actions">
+          <Link href={`/${lang}/foundations`}>
+            {lang === "zh" ? "打开基础包" : "Open the foundation pack"}
+          </Link>
         </div>
       </section>
 
@@ -186,6 +217,52 @@ export default async function ResearchReadyPage({
               <p>{lang === "zh" ? "未就绪：" : "Not ready:"} {lang === "zh" ? item.not_ready_zh : item.not_ready_en}</p>
               <p>{lang === "zh" ? "接近就绪：" : "Near ready:"} {lang === "zh" ? item.near_ready_zh : item.near_ready_en}</p>
               <p>{lang === "zh" ? "就绪：" : "Ready:"} {lang === "zh" ? item.ready_zh : item.ready_en}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="panel">
+        <div className="panel-header">
+          <div>
+            <p className="eyebrow">{lang === "zh" ? "参考答案层" : "Reference-output layer"}</p>
+            <h3>{lang === "zh" ? "用样例校准自己交付物的密度" : "Use examples to calibrate the density of your deliverables"}</h3>
+          </div>
+        </div>
+        <div className="cards">
+          {referenceOutputs.map((item) => (
+            <article className="module-card" key={item.id}>
+              <span className="module-id">{item.id}</span>
+              <strong>{lang === "zh" ? item.title_zh : item.title_en}</strong>
+              <p>{lang === "zh" ? item.summary_zh : item.summary_en}</p>
+              <p>{lang === "zh" ? "适用场景：" : "Best for:"} {lang === "zh" ? item.best_for_zh : item.best_for_en}</p>
+              <code>{lang === "zh" ? item.path_zh : item.path_en}</code>
+              <a href={githubBlob(lang === "zh" ? item.path_zh : item.path_en)} rel="noreferrer" target="_blank">
+                {lang === "zh" ? "打开样例" : "Open example"}
+              </a>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="panel">
+        <div className="panel-header">
+          <div>
+            <p className="eyebrow">{lang === "zh" ? "扩展论文" : "Extension papers"}</p>
+            <h3>{lang === "zh" ? "主线结束后补公司的通用研究视野" : "Add general company-research breadth after the core path"}</h3>
+          </div>
+        </div>
+        <div className="cards">
+          {extensions.map((item) => (
+            <article className="module-card" key={item.id}>
+              <span className="module-id">{item.id}</span>
+              <strong>{lang === "zh" ? item.title_zh : item.title_en}</strong>
+              <p>{lang === "zh" ? item.summary_zh : item.summary_en}</p>
+              <p>{lang === "zh" ? "为什么现在读：" : "Why now:"} {lang === "zh" ? item.why_now_zh : item.why_now_en}</p>
+              <p>{lang === "zh" ? "交付物：" : "Ship this:"} {lang === "zh" ? item.assignment_zh : item.assignment_en}</p>
+              <a href={item.source_url} rel="noreferrer" target="_blank">
+                {lang === "zh" ? "打开原文" : "Open source"}
+              </a>
             </article>
           ))}
         </div>

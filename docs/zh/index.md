@@ -2,6 +2,11 @@
 
 这门课改成了文章优先结构：核心路径里的每一篇论文，都有自己独立的讲义、notebook 和时间线位置。
 
+## Pre-P4 基础包
+
+- [基础包总览](foundations/index.md)
+- 建议在文章主线之前先做 `F00-F03`，尤其当你还不稳定地运行 notebook、读 attention 图或写实验日志时。
+
 ## 阅读顺序
 
 1. [M00 Zoom In：电路入门](modules/m00-zoom-in-circuits.md)
@@ -31,6 +36,8 @@
 - [研究工作流](program/research-playbook.md)
 - [评估 rubric](program/evaluation-rubric.md)
 - [公司入职模拟](program/company-onramp.md)
+- [参考答案层](program/reference-outputs.md)
+- [扩展论文轨道](program/advanced-extensions.md)
 
 建议按这个顺序使用：
 
@@ -43,6 +50,6 @@
 ## 使用约束
 
 - `M00-M05` 设计目标是 CPU 或免费 Colab 可跑。
-- `M06-M10` 是围绕预计算 artifact 的教学复现，不是完整论文级实验。
+- `M06` 和 `M08` 现在包含轻量本地复现；`M03`、`M07`、`M09`、`M10` 仍然主要是 artifact-guided 教学复现。
 - 中英内容必须结构镜像。如果一边新增文章讲义，另一边也要新增。
 - 如果目标是进入公司研究环境，最重要的是输出质量，而不是完成数量。

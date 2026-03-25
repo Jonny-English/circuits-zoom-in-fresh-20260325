@@ -32,7 +32,7 @@
 ## 任务 3：Artifact 反驳式阅读
 
 - 时间预算：90-120 分钟
-- 输入：`M06-M10` 任意一篇 artifact-guided 文章
+- 输入：`M03`、`M07`、`M09`、`M10` 中任意一篇 artifact-heavy 文章
 - 必须产出：
   - 1 份 critique
   - 1 份 ambiguity 列表

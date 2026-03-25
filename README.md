@@ -13,7 +13,11 @@ The repository has three synced layers:
 - `docs/en` and `docs/zh` mirror each other exactly.
 - `notebooks/en` and `notebooks/zh` mirror each other exactly, while `web/` turns the same metadata into a static course explorer.
 
-It also now has a second layer for serious learners: a research-ready path with a 12-week bootcamp, memo templates, a rubric, and simulated company-style research tasks.
+It now also has three reinforcement layers:
+
+- a `Pre-P4 foundation pack` that repairs environment setup, attention-shape intuition, vector geometry, and experiment discipline
+- a `research-ready path` with a 12-week bootcamp, memo templates, a rubric, and company-style research tasks
+- a `reference-output layer + extension-paper track` that calibrate deliverable quality and widen the research view beyond the Anthropic core arc
 
 That second layer exists to stop the most common self-study failure mode: finishing the reading without building research habits.
 
@@ -51,7 +55,7 @@ To serve both true beginners and readers with some prior foundation, the reposit
 
 - Best for: readers who know some Python but still have unstable environment setup, math fluency, and experiment discipline.
 - Entry signal: you still cannot run notebooks reliably, read basic plots comfortably, or explain what a baseline is.
-- Recommended path: finish `M00` and `M01` first, make the reading-note and experiment-log templates feel routine, then enter the full course.
+- Recommended path: finish `F00-F03` plus `M00` and `M01`, make the reading-note and experiment-log templates feel routine, then enter the full course.
 - Target: first move toward something close to Alibaba-style `P4`, then continue toward `P5`.
 
 ### Prepared Runway
@@ -95,6 +99,19 @@ So the right focus is no longer only the fine-grained craft of manually executin
 
 That is also why this repository is not only about paper summaries. It is also about experiments, artifacts, steering, tracing, and research communication.
 
+## Pre-P4 Foundation Pack
+
+If notebooks, plots, attention shapes, or baseline/sweep/ablation discipline still feel unstable, do not rush into the paper core. Repair those four labs first.
+
+<!-- FOUNDATION_TABLE:START -->
+| ID | Foundation Lab | Notebook | Colab | Runnable tier | What it repairs |
+|---|---|---|---|---|---|
+| `F00` | Environment, Plots, and Baseline Discipline | [Open](notebooks/foundations/en/f00_environment_plots_baselines.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/foundations/en/f00_environment_plots_baselines.ipynb) | `cpu-colab` | Set up a local or Colab workflow, read loss curves, and learn the minimum discipline of baselines, variants, and logging. |
+| `F01` | Transformer Shapes and Attention Reading | [Open](notebooks/foundations/en/f01_transformer_shapes_attention.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/foundations/en/f01_transformer_shapes_attention.ipynb) | `cpu-colab` | Use a tiny attention example to build intuition for tokens, heads, QK scores, softmax, and residual updates. |
+| `F02` | Vector Geometry, Features, and Probes | [Open](notebooks/foundations/en/f02_vector_geometry_features_probes.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/foundations/en/f02_vector_geometry_features_probes.ipynb) | `cpu-colab` | Practice cosine, projection, directional similarity, and linear probes on toy vectors to build the geometric floor under the feature language. |
+| `F03` | Sweeps, Ablations, and Failure Analysis | [Open](notebooks/foundations/en/f03_sweeps_ablations_failure_analysis.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/foundations/en/f03_sweeps_ablations_failure_analysis.ipynb) | `cpu-colab` | Use one small experiment to practice sweeps, ablations, stop conditions, and failure analysis so 'I can run notebooks' becomes 'I can design a minimal experiment.' |
+<!-- FOUNDATION_TABLE:END -->
+
 ## One Article, One Colab
 
 Each row below corresponds to exactly one paper and one notebook. Every paired note and Colab notebook now also includes self-check questions so readers can test whether they actually absorbed the material.
@@ -108,20 +125,21 @@ Each row below corresponds to exactly one paper and one notebook. Every paired n
 | `M03` | Mapping the Mind of a Large Language Model | `2024-05-21` | [Open](notebooks/en/m03_mapping_the_mind.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m03_mapping_the_mind.ipynb) | `artifact-guided` | Browse a teaching-scale feature catalog to understand what it means to discover many reusable features. |
 | `M04` | Using Dictionary Learning Features as Classifiers | `2024-10-16` | [Open](notebooks/en/m04_features_as_classifiers.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m04_features_as_classifiers.ipynb) | `cpu-colab` | Treat features as classifier inputs and study where readout ability comes from. |
 | `M05` | Evaluating Feature Steering | `2024-10-25` | [Open](notebooks/en/m05_evaluating_feature_steering.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m05_evaluating_feature_steering.ipynb) | `cpu-colab` | Sweep steering strength to inspect target gain, sweet spots, and off-target costs. |
-| `M06` | Tracing the Thoughts of a Large Language Model | `2025-03-27` | [Open](notebooks/en/m06_tracing_thoughts.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m06_tracing_thoughts.ipynb) | `artifact-guided` | Use a precomputed attribution graph to read a local computation path. |
+| `M06` | Tracing the Thoughts of a Large Language Model | `2025-03-27` | [Open](notebooks/en/m06_tracing_thoughts.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m06_tracing_thoughts.ipynb) | `cpu-colab` | Run a toy tracing reproduction locally, then use a shared attribution graph to read a local computation path. |
 | `M07` | Open-sourcing Circuit Tracing Tools | `2025-05-29` | [Open](notebooks/en/m07_circuit_tracing_tools.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m07_circuit_tracing_tools.ipynb) | `artifact-guided` | Inspect tracing artifacts and workflow stages to understand the tooling layer behind the analysis. |
-| `M08` | Persona Vectors | `2025-08-01` | [Open](notebooks/en/m08_persona_vectors.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m08_persona_vectors.ipynb) | `artifact-guided` | Use before/after persona-vector comparisons to study character traits as directions. |
+| `M08` | Persona Vectors | `2025-08-01` | [Open](notebooks/en/m08_persona_vectors.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m08_persona_vectors.ipynb) | `cpu-colab` | Construct a teaching-scale persona direction locally, then use a shared artifact to compare before/after trait shifts. |
 | `M09` | Signs of Introspection in Large Language Models | `2025-10-29` | [Open](notebooks/en/m09_signs_of_introspection.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m09_signs_of_introspection.ipynb) | `artifact-guided` | Compare self-report and behavior signals in teaching data to discuss what 'signs of introspection' actually mean. |
 | `M10` | The Assistant Axis | `2026-01-19` | [Open](notebooks/en/m10_assistant_axis.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m10_assistant_axis.ipynb) | `artifact-guided` | Project multiple assistant styles onto one axis and inspect the problem of stabilizing character. |
 <!-- COURSE_TABLE:END -->
 
 ## Suggested Paths
 
+- `Pre-P4 foundation pack`: `F00 → F01 → F02 → F03`
 - `Foundations`: `M00 → M01 → M02`
 - `Feature discovery and use`: `M03 → M04 → M05`
 - `Tracing and character`: `M06 → M07 → M08 → M09 → M10`
 
-If you want the shortest useful path, start with `M00`, `M01`, `M02`, `M05`, and `M06`.
+If you want the shortest useful path, start with `F00`, then `M00`, `M01`, `M02`, `M05`, and `M06`.
 
 ## Research-Ready Path
 
@@ -132,6 +150,8 @@ If your goal is not just understanding but becoming useful in a company research
 - [Research playbook](docs/en/program/research-playbook.md)
 - [Evaluation rubric](docs/en/program/evaluation-rubric.md)
 - [Company onramp simulation](docs/en/program/company-onramp.md)
+- [Reference-output layer](docs/en/program/reference-outputs.md)
+- [Advanced extension track](docs/en/program/advanced-extensions.md)
 
 Templates:
 
@@ -139,12 +159,40 @@ Templates:
 - [Experiment log](templates/experiment_log_en.md)
 - [Research memo](templates/research_memo_en.md)
 
+Internal training stages now use `S0-S4` so they stay clearly separate from the Alibaba-style `P4-P12` capability mapping above.
+
 Use the research-ready track as an operating system, not as extra reading:
 
 - Every article should leave behind a reading note, an experiment log, a short memo, and a next-question list.
 - The weekly path assumes `8-12` focused hours per week.
 - You should finish with a real portfolio: notes, logs, memos, an artifact critique, and a two-week capstone proposal.
 - The bar is not "I followed the notebooks." The bar is "I can read, reproduce, critique, and propose the next experiment."
+
+## Reference-Output Layer
+
+This layer is not for copying. It is for calibrating what a deliverable looks like when it is ready for a mentor, manager, or hiring loop.
+
+<!-- REFERENCE_TABLE:START -->
+| ID | Reference Output | File | When to use it |
+|---|---|---|---|
+| `R01` | Reference Paper Brief | [examples/en/reference_paper_brief.md](examples/en/reference_paper_brief.md) | Use it after company task T1 or any paper reading note that needs to be compressed for a manager. |
+| `R02` | Reference Experiment Log | [examples/en/reference_experiment_log.md](examples/en/reference_experiment_log.md) | Use it after any sweep, ablation, or feature-steering notebook. |
+| `R03` | Reference Artifact Critique | [examples/en/reference_artifact_critique.md](examples/en/reference_artifact_critique.md) | Use it for M03, M07, M09, M10, or company task T3. |
+| `R04` | Reference Two-Week Proposal | [examples/en/reference_two_week_proposal.md](examples/en/reference_two_week_proposal.md) | Use it before a capstone or company task T4 to calibrate the density of your proposal. |
+<!-- REFERENCE_TABLE:END -->
+
+## Extension-Paper Track
+
+The core course is intentionally organized around the Anthropic interpretability arc, but that is still not broad enough for company research readiness. After the core, widen out into transformer circuits, canonical behavior circuits, and auditing-facing work.
+
+<!-- EXTENSION_TABLE:START -->
+| ID | Extension Paper | Link | Why now | What to ship |
+|---|---|---|---|---|
+| `X01` | A Mathematical Framework for Transformer Circuits | [Source](https://transformer-circuits.pub/2021/framework/index.html) | After M06, this moves you from 'I can read one graph' to 'I can speak the general framework.' | Write a one-page framework brief and restate one M06 toy trace using residual-stream and composition language. |
+| `X02` | In-context Learning and Induction Heads | [Source](https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html) | It connects attention reading, circuit language, and a concrete behavioral phenomenon, making it a first stop for classic transformer-circuits work. | Make a reading note for a minimal copying task and explain why an induction head is more like a mechanism than a single attention hotspot. |
+| `X03` | Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 Small | [Source](https://arxiv.org/abs/2211.00593) | After the Anthropic core path, this forces you to handle messier behavior definitions, more heads, and a longer evidence chain. | Write one IOI evidence-chain brief and state which uncertainties appear here that were absent in the M06 toy trace. |
+| `X04` | Auditing Language Models for Hidden Objectives | [Source](https://www.anthropic.com/research/auditing-hidden-objectives) | If company research is the goal, this places features, tracing, and safety-facing auditing in one frame. | Write one auditing memo describing which behavioral signals, internal evidence, and stop conditions you would inspect first if you suspected a hidden objective. |
+<!-- EXTENSION_TABLE:END -->
 
 ## Quick Start
 
@@ -178,8 +226,9 @@ If you prefer a browser-first workflow, open the Colab links in the table above 
 ```text
 .
 ├── content/               # Course metadata and glossary
-├── docs/                  # Mirrored zh/en article notes
-├── notebooks/             # Legacy notebook + mirrored article notebooks
+├── docs/                  # Mirrored zh/en article notes + foundations + bootcamp docs
+├── notebooks/             # Legacy notebook + article notebooks + foundation labs
+├── examples/              # Reference briefs, logs, critiques, and proposals
 ├── artifacts/             # Shared JSON artifacts for notebooks and web
 ├── web/                   # Static Next.js explorer
 ├── scripts/               # Notebook generation and validation

@@ -1,12 +1,16 @@
 import Link from "next/link";
 
+import { AssistantAxisPreview } from "@/components/AssistantAxisPreview";
 import { CircuitExplorer } from "@/components/CircuitExplorer";
+import { IntrospectionPreview } from "@/components/IntrospectionPreview";
 import { PersonaPreview } from "@/components/PersonaPreview";
 import {
+  getAssistantAxisPayload,
   getAttributionCases,
   getColabUrl,
   getCourse,
   getDoc,
+  getIntrospectionPayload,
   getLocalizedSummary,
   getLocalizedTitle,
   getModule,
@@ -82,8 +86,8 @@ export default async function ModulePage({
       <section className="panel">
         <div className="panel-header">
           <div>
-            <p className="eyebrow">{language === "zh" ? "正文" : "Module note"}</p>
-            <h3>{language === "zh" ? "直接来自同步文档" : "Rendered from the mirrored docs"}</h3>
+            <p className="eyebrow">{language === "zh" ? "正文" : "Article note"}</p>
+            <h3>{language === "zh" ? "直接来自同步讲义" : "Rendered from the mirrored article notes"}</h3>
           </div>
         </div>
         <article className="doc-article">{renderDoc(doc)}</article>
@@ -93,7 +97,7 @@ export default async function ModulePage({
         <div className="panel-header">
           <div>
             <p className="eyebrow">{language === "zh" ? "材料入口" : "Materials"}</p>
-            <h3>{language === "zh" ? "文档、notebook 与论文" : "Docs, notebook, and papers"}</h3>
+            <h3>{language === "zh" ? "讲义、notebook 与论文" : "Note, notebook, and paper"}</h3>
           </div>
         </div>
         <div className="link-stack">
@@ -110,8 +114,12 @@ export default async function ModulePage({
         </div>
       </section>
 
-      {module.id === "M04" ? <CircuitExplorer cases={getAttributionCases()} language={language} /> : null}
-      {module.id === "M05" ? <PersonaPreview payload={getPersonaPayload()} language={language} /> : null}
+      {module.id === "M06" || module.id === "M07" ? (
+        <CircuitExplorer cases={getAttributionCases()} language={language} />
+      ) : null}
+      {module.id === "M08" ? <PersonaPreview payload={getPersonaPayload()} language={language} /> : null}
+      {module.id === "M09" ? <IntrospectionPreview payload={getIntrospectionPayload()} language={language} /> : null}
+      {module.id === "M10" ? <AssistantAxisPreview payload={getAssistantAxisPayload()} language={language} /> : null}
 
       <section className="panel">
         <div className="panel-header">
@@ -122,6 +130,9 @@ export default async function ModulePage({
         </div>
         <div className="hero-actions">
           <Link href={`/${language}`}>{language === "zh" ? "返回课程首页" : "Return to course home"}</Link>
+          <Link href={`/${language}/research-ready`}>
+            {language === "zh" ? "进入研究训练营" : "Open the research-ready track"}
+          </Link>
           <Link href="/timeline">{language === "zh" ? "查看论文时间线" : "Open paper timeline"}</Link>
         </div>
       </section>

@@ -40,5 +40,19 @@
     "term_en": "Persona Vector",
     "definition_zh": "刻画模型某类 character trait 的方向，可以被监控、比较和轻量干预。",
     "definition_en": "A direction associated with a character trait that can be monitored, compared, and lightly intervened on."
+  },
+  {
+    "id": "introspection_signal",
+    "term_zh": "内省信号",
+    "term_en": "Introspection Signal",
+    "definition_zh": "模型关于自身状态的陈述与可观察行为之间形成的证据线索。",
+    "definition_en": "A line of evidence built from the relationship between a model's statements about itself and its observable behavior."
+  },
+  {
+    "id": "assistant_axis",
+    "term_zh": "助手轴",
+    "term_en": "Assistant Axis",
+    "definition_zh": "用来定位和稳定 assistant 风格的一条表示方向。",
+    "definition_en": "A representational direction used to locate and stabilize assistant style."
   }
 ]

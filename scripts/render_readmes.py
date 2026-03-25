@@ -28,15 +28,15 @@ def colab_url(module: dict, language: str) -> str:
 
 def build_table(course: list[dict], language: str) -> str:
     if language == "zh":
-        header = "| 模块 | 主题 | Notebook | Colab | 运行层级 | 说明 |\n|---|---|---|---|---|---|"
+        header = "| ID | 文章 | 日期 | Notebook | Colab | 运行层级 | 你会做什么 |\n|---|---|---|---|---|---|---|"
         rows = [
-            f"| `{module['id']}` | {module['title_zh']} | [打开]({notebook_path(module, 'zh')}) | [Colab]({colab_url(module, 'zh')}) | `{module['runnable_tier']}` | {module['summary_zh']} |"
+            f"| `{module['id']}` | {module['title_zh']} | `{module['paper_refs'][0]['date']}` | [打开]({notebook_path(module, 'zh')}) | [Colab]({colab_url(module, 'zh')}) | `{module['runnable_tier']}` | {module['summary_zh']} |"
             for module in course
         ]
     else:
-        header = "| Module | Topic | Notebook | Colab | Runnable tier | Why it matters |\n|---|---|---|---|---|---|"
+        header = "| ID | Paper | Date | Notebook | Colab | Runnable tier | What you will do |\n|---|---|---|---|---|---|---|"
         rows = [
-            f"| `{module['id']}` | {module['title_en']} | [Open]({notebook_path(module, 'en')}) | [Colab]({colab_url(module, 'en')}) | `{module['runnable_tier']}` | {module['summary_en']} |"
+            f"| `{module['id']}` | {module['title_en']} | `{module['paper_refs'][0]['date']}` | [Open]({notebook_path(module, 'en')}) | [Colab]({colab_url(module, 'en')}) | `{module['runnable_tier']}` | {module['summary_en']} |"
             for module in course
         ]
     return "\n".join([header, *rows])

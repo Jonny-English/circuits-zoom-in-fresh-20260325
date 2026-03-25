@@ -5,35 +5,118 @@
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 [![Next.js Static Export](https://img.shields.io/badge/web-next.js-black.svg)](web/)
 
-`From Circuits to Claude` is a bilingual interpretability course built for readers who know basic Python and PyTorch, but are new to mechanistic interpretability. It keeps the visual clarity of the original `circuits-zoom-in` project, then extends that intuition into Anthropic's core line of work on superposition, dictionary learning, circuit tracing, and character control.
+`From Circuits to Claude` is a bilingual interpretability course for readers who know basic Python and PyTorch, but are new to mechanistic interpretability. The repository is now article-first: every core paper in the path has one mirrored note and one Colab notebook.
 
-The repository now has three synced layers:
+The repository has three synced layers:
 
-- `content/course.json` is the single source of truth for module order, titles, prerequisites, papers, and artifacts.
+- `content/course.json` is the single source of truth for order, prerequisites, links, and artifacts.
 - `docs/en` and `docs/zh` mirror each other exactly.
 - `notebooks/en` and `notebooks/zh` mirror each other exactly, while `web/` turns the same metadata into a static course explorer.
 
-## Course map
+It also now has a second layer for serious learners: a research-ready path with a 12-week bootcamp, memo templates, a rubric, and simulated company-style research tasks.
+
+That second layer exists to stop the most common self-study failure mode: finishing the reading without building research habits.
+
+## Who This Project Is For
+
+- It is beginner-friendly for readers with basic Python and PyTorch but little or no mechanistic-interpretability background.
+- It is for readers who want to move from "I can follow a few papers" to "I can start contributing as a large-model research apprentice inside a company."
+- It is not designed as passive popularization. You are expected to write reading notes, experiment logs, and short memos.
+
+The target output of this repository is not "a person who has seen many papers." The target output is a `P6`-level large-model research apprentice.
+
+Here `P` means an internal `Progression` ladder rather than a formal title:
+
+| Level | Capability |
+|---|---|
+| `P0` | Complete beginner who knows large models are important but cannot yet run the environment, read plots, or log experiments reliably. |
+| `P1` | Can run notebooks by following instructions, but still cannot explain the core concepts clearly. |
+| `P2` | Can restate the question, method, and main result of a single paper. |
+| `P3` | Can write basic paper-reading notes and experiment logs, and is starting to build research discipline. |
+| `P4` | Can change one variable family independently, compare baseline versus variant, and write an initial judgment. |
+| `P5` | Can read artifacts, identify limitations, write short memos, and separate observation from inference. |
+| `**P6**` | Can operate inside a company research setting on entry-level tasks under a mentor or research lead: read, reproduce, critique, and propose the next experiment. |
+| `P7` | Can propose and run a two-week-scale research plan on a small problem with consistent reporting. |
+| `P8` | Can own a sub-area or tooling line and guide `P5-P6` collaborators. |
+| `P9` | Can define a medium-term team research thread and connect experiments, tools, and communication. |
+| `P10` | Can lead quarter-scale research direction while connecting research judgment to product and safety constraints. |
+| `P11` | Can define institution-level agenda, standards, and talent-development patterns. |
+| `P12` | Can change the field's understanding of how large models work and how they should be controlled. |
+
+The realistic target of this repository is to move a reader from roughly `P0-P2` to `P6`. Strong completers may start touching the lower edge of `P7`.
+
+## Why Learn This
+
+After the spinning jenny appeared, the center of value in textile work stopped being "who has the most refined hand-spinning technique." It shifted toward:
+
+- who understood the machine
+- who could use the machine well
+- who could modify the machine
+- who could reorganize production around the machine
+
+The large-model era creates the same shift.
+
+When models can already perform a large amount of local cognitive work, the scarce skill is no longer only "manually weaving every sentence, reasoning step, or code block by hand." The scarce skill becomes:
+
+- understanding what the model is representing internally
+- understanding why it succeeds and why it fails
+- understanding which directions can be read out, intervened on, and controlled safely
+- understanding how to turn those judgments into research, tooling, and product decisions
+
+So learning interpretability is not just learning a set of paper summaries. It is learning how to understand and steer machine intelligence once the machine itself becomes the central productive object.
+
+## One Article, One Colab
+
+Each row below corresponds to exactly one paper and one notebook. Every paired note and Colab notebook now also includes self-check questions so readers can test whether they actually absorbed the material.
 
 <!-- COURSE_TABLE:START -->
-| Module | Topic | Notebook | Colab | Runnable tier | Why it matters |
-|---|---|---|---|---|---|
-| `M00` | Vision Circuits Warm-up | [Open](notebooks/en/m00_vision_circuits.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m00_vision_circuits.ipynb) | `warmup` | Reuse the original Zoom In visual-circuits material to establish intuition for features, circuits, and interventions. |
-| `M01` | Superposition | [Open](notebooks/en/m01_superposition.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m01_superposition.ipynb) | `cpu-colab` | Use a sparse toy model to understand why neurons are often not clean semantic units. |
-| `M02` | Monosemantic Features and Dictionary Learning | [Open](notebooks/en/m02_monosemantic_features.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m02_monosemantic_features.ipynb) | `cpu-colab` | Use a teaching-scale SAE to understand the shift from neuron-centric to feature-centric analysis. |
-| `M03` | Feature Probes and Steering | [Open](notebooks/en/m03_feature_probes_steering.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m03_feature_probes_steering.ipynb) | `cpu-colab` | Show, in a small runnable experiment, how features can support both reading and intervention. |
-| `M04` | Circuit Tracing | [Open](notebooks/en/m04_circuit_tracing.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m04_circuit_tracing.ipynb) | `artifact-guided` | Learn to read local computation paths in an LLM through precomputed attribution graphs. |
-| `M05` | Character and Control | [Open](notebooks/en/m05_character_control.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m05_character_control.ipynb) | `artifact-guided` | Connect interpretability to character control through persona vectors and frontier reading. |
+| ID | Paper | Date | Notebook | Colab | Runnable tier | What you will do |
+|---|---|---|---|---|---|---|
+| `M00` | Zoom In: An Introduction to Circuits | `2020-03-10` | [Open](notebooks/en/m00_zoom_in_circuits.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m00_zoom_in_circuits.ipynb) | `warmup` | Build first-pass intuition for features, circuits, and interventions in a visual model. |
+| `M01` | Toy Models of Superposition | `2022-09-14` | [Open](notebooks/en/m01_toy_models_superposition.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m01_toy_models_superposition.ipynb) | `cpu-colab` | Use a minimal toy model to see why neurons can mix multiple semantics. |
+| `M02` | Towards Monosemanticity | `2023-10-05` | [Open](notebooks/en/m02_towards_monosemanticity.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m02_towards_monosemanticity.ipynb) | `cpu-colab` | Use a teaching-scale sparse autoencoder to see why a feature view can be cleaner than a neuron view. |
+| `M03` | Mapping the Mind of a Large Language Model | `2024-05-21` | [Open](notebooks/en/m03_mapping_the_mind.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m03_mapping_the_mind.ipynb) | `artifact-guided` | Browse a teaching-scale feature catalog to understand what it means to discover many reusable features. |
+| `M04` | Using Dictionary Learning Features as Classifiers | `2024-10-16` | [Open](notebooks/en/m04_features_as_classifiers.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m04_features_as_classifiers.ipynb) | `cpu-colab` | Treat features as classifier inputs and study where readout ability comes from. |
+| `M05` | Evaluating Feature Steering | `2024-10-25` | [Open](notebooks/en/m05_evaluating_feature_steering.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m05_evaluating_feature_steering.ipynb) | `cpu-colab` | Sweep steering strength to inspect target gain, sweet spots, and off-target costs. |
+| `M06` | Tracing the Thoughts of a Large Language Model | `2025-03-27` | [Open](notebooks/en/m06_tracing_thoughts.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m06_tracing_thoughts.ipynb) | `artifact-guided` | Use a precomputed attribution graph to read a local computation path. |
+| `M07` | Open-sourcing Circuit Tracing Tools | `2025-05-29` | [Open](notebooks/en/m07_circuit_tracing_tools.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m07_circuit_tracing_tools.ipynb) | `artifact-guided` | Inspect tracing artifacts and workflow stages to understand the tooling layer behind the analysis. |
+| `M08` | Persona Vectors | `2025-08-01` | [Open](notebooks/en/m08_persona_vectors.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m08_persona_vectors.ipynb) | `artifact-guided` | Use before/after persona-vector comparisons to study character traits as directions. |
+| `M09` | Signs of Introspection in Large Language Models | `2025-10-29` | [Open](notebooks/en/m09_signs_of_introspection.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m09_signs_of_introspection.ipynb) | `artifact-guided` | Compare self-report and behavior signals in teaching data to discuss what 'signs of introspection' actually mean. |
+| `M10` | The Assistant Axis | `2026-01-19` | [Open](notebooks/en/m10_assistant_axis.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/circuits-zoom-in-fresh-20260325/blob/main/notebooks/en/m10_assistant_axis.ipynb) | `artifact-guided` | Project multiple assistant styles onto one axis and inspect the problem of stabilizing character. |
 <!-- COURSE_TABLE:END -->
 
-## Learning design
+## Suggested Paths
 
-- `M00` keeps the original visual circuits notebook as a warm-up so readers first see interpretable circuits in a concrete visual model.
-- `M01-M03` are fully runnable CPU labs covering superposition, monosemantic features, and feature probes/steering.
-- `M04-M05` use precomputed artifacts to teach attribution graphs and persona vectors without requiring proprietary models or large-scale tracing runs.
-- `Timeline` and `concept graph` views in `web/` help readers connect papers, ideas, and labs without losing the runnable path.
+- `Foundations`: `M00 → M01 → M02`
+- `Feature discovery and use`: `M03 → M04 → M05`
+- `Tracing and character`: `M06 → M07 → M08 → M09 → M10`
 
-## Quick start
+If you want the shortest useful path, start with `M00`, `M01`, `M02`, `M05`, and `M06`.
+
+## Research-Ready Path
+
+If your goal is not just understanding but becoming useful in a company research setting, use these files alongside the article notebooks:
+
+- [Research-ready overview](docs/en/program/research-ready.md)
+- [12-week bootcamp](docs/en/program/week-by-week.md)
+- [Research playbook](docs/en/program/research-playbook.md)
+- [Evaluation rubric](docs/en/program/evaluation-rubric.md)
+- [Company onramp simulation](docs/en/program/company-onramp.md)
+
+Templates:
+
+- [Paper reading note](templates/paper_reading_note_en.md)
+- [Experiment log](templates/experiment_log_en.md)
+- [Research memo](templates/research_memo_en.md)
+
+Use the research-ready track as an operating system, not as extra reading:
+
+- Every article should leave behind a reading note, an experiment log, a short memo, and a next-question list.
+- The weekly path assumes `8-12` focused hours per week.
+- You should finish with a real portfolio: notes, logs, memos, an artifact critique, and a two-week capstone proposal.
+- The bar is not "I followed the notebooks." The bar is "I can read, reproduce, critique, and propose the next experiment."
+
+## Quick Start
 
 ```bash
 pip install -r requirements.txt
@@ -58,13 +141,15 @@ npm install
 npm run build
 ```
 
-## Repo structure
+If you prefer a browser-first workflow, open the Colab links in the table above directly.
+
+## Repo Structure
 
 ```text
 .
 ├── content/               # Course metadata and glossary
-├── docs/                  # Mirrored zh/en concept docs
-├── notebooks/             # Legacy notebook + mirrored course notebooks
+├── docs/                  # Mirrored zh/en article notes
+├── notebooks/             # Legacy notebook + mirrored article notebooks
 ├── artifacts/             # Shared JSON artifacts for notebooks and web
 ├── web/                   # Static Next.js explorer
 ├── scripts/               # Notebook generation and validation
@@ -72,18 +157,18 @@ npm run build
 └── utils/                 # Shared plotting helpers from the original tutorial
 ```
 
-## Legacy material
+## What Stays From the Original Project
 
 The original notebooks remain in place:
 
 - `notebooks/circuits_zoom_in_en.ipynb`
 - `notebooks/circuits_zoom_in_zh.ipynb`
 
-They now serve as the long-form source material behind `M00`.
+They now act as the long-form background material behind `M00`.
 
 ## References
 
-The core curriculum is anchored in official Anthropic research pages as of `2026-03-25`, with the interpretability team page as the index:
+The core reading path is anchored in official Anthropic research pages as of `2026-03-25`, with the interpretability team page as the index:
 
 - [Anthropic Interpretability team page](https://www.anthropic.com/research/team/interpretability)
 - [Toy Models of Superposition](https://www.anthropic.com/research/toy-models-of-superposition)

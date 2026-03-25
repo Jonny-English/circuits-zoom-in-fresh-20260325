@@ -29,6 +29,75 @@ export type GlossaryTerm = {
   definition_en: string;
 };
 
+export type SelfCheck = {
+  module_id: string;
+  questions_zh: string[];
+  questions_en: string[];
+};
+
+export type ProgramPayload = {
+  goal_zh: string;
+  goal_en: string;
+  entry_requirements_zh: string[];
+  entry_requirements_en: string[];
+  study_contract_zh: string[];
+  study_contract_en: string[];
+  exit_portfolio_zh: string[];
+  exit_portfolio_en: string[];
+  phases: Array<{
+    id: string;
+    weeks: string;
+    title_zh: string;
+    title_en: string;
+    focus_zh: string[];
+    focus_en: string[];
+    deliverables_zh: string[];
+    deliverables_en: string[];
+    gate_zh: string;
+    gate_en: string;
+  }>;
+  weeks: Array<{
+    id: string;
+    title_zh: string;
+    title_en: string;
+    module_ids: string[];
+    time_budget_hours: string;
+    activities_zh: string[];
+    activities_en: string[];
+    outputs_zh: string[];
+    outputs_en: string[];
+    checkpoint_zh: string;
+    checkpoint_en: string;
+  }>;
+  company_tasks: Array<{
+    id: string;
+    title_zh: string;
+    title_en: string;
+    brief_zh: string;
+    brief_en: string;
+    required_outputs_zh: string[];
+    required_outputs_en: string[];
+    timebox: string;
+  }>;
+  capstones: Array<{
+    id: string;
+    title_zh: string;
+    title_en: string;
+    brief_zh: string;
+    brief_en: string;
+  }>;
+  rubric: Array<{
+    skill_zh: string;
+    skill_en: string;
+    not_ready_zh: string;
+    not_ready_en: string;
+    near_ready_zh: string;
+    near_ready_en: string;
+    ready_zh: string;
+    ready_en: string;
+  }>;
+};
+
 export type ConceptGraph = {
   nodes: Array<{
     id: string;
@@ -44,6 +113,19 @@ export type ConceptGraph = {
     weight: number;
     label_zh: string;
     label_en: string;
+  }>;
+};
+
+export type FeatureCatalog = {
+  features: Array<{
+    id: string;
+    domain_zh: string;
+    domain_en: string;
+    label_zh: string;
+    label_en: string;
+    max_activation: number;
+    examples_zh: string[];
+    examples_en: string[];
   }>;
 };
 
@@ -68,6 +150,16 @@ export type AttributionCase = {
   }>;
 };
 
+export type TracingWorkflow = {
+  steps: Array<{
+    id: string;
+    title_zh: string;
+    title_en: string;
+    output: string;
+    estimated_minutes: number;
+  }>;
+};
+
 export type PersonaPayload = {
   personas: Array<{
     id: string;
@@ -82,6 +174,28 @@ export type PersonaPayload = {
     prompt: string;
     response_before: string;
     response_after: string;
+  }>;
+};
+
+export type IntrospectionPayload = {
+  cases: Array<{
+    id: string;
+    scenario_zh: string;
+    scenario_en: string;
+    self_report: number;
+    behavior_signal: number;
+  }>;
+};
+
+export type AssistantAxisPayload = {
+  assistants: Array<{
+    id: string;
+    label_zh: string;
+    label_en: string;
+    axis_position: number;
+    helpfulness: number;
+    safety: number;
+    warmth: number;
   }>;
 };
 
@@ -102,19 +216,51 @@ export function getGlossary(): GlossaryTerm[] {
   return readJson<GlossaryTerm[]>("content/glossary.json");
 }
 
+export function getSelfChecks(): SelfCheck[] {
+  return readJson<SelfCheck[]>("content/self_checks.json");
+}
+
+export function getSelfCheck(id: string): SelfCheck {
+  const item = getSelfChecks().find((entry) => entry.module_id === id);
+  if (!item) {
+    throw new Error(`Unknown self-check module: ${id}`);
+  }
+  return item;
+}
+
+export function getProgram(): ProgramPayload {
+  return readJson<ProgramPayload>("content/program.json");
+}
+
 export function getConceptGraph(): ConceptGraph {
   return readJson<ConceptGraph>("artifacts/concept_graph.json");
 }
 
+export function getFeatureCatalog(): FeatureCatalog {
+  return readJson<FeatureCatalog>("artifacts/m03_feature_catalog.json");
+}
+
 export function getAttributionCases(): AttributionCase[] {
-  return readJson<{ cases: AttributionCase[] }>("artifacts/m04_attribution_graph.json").cases;
+  return readJson<{ cases: AttributionCase[] }>("artifacts/m06_attribution_graph.json").cases;
+}
+
+export function getTracingWorkflow(): TracingWorkflow {
+  return readJson<TracingWorkflow>("artifacts/m07_tracing_tool_workflow.json");
 }
 
 export function getPersonaPayload(): PersonaPayload {
-  return readJson<PersonaPayload>("artifacts/m05_persona_vectors.json");
+  return readJson<PersonaPayload>("artifacts/m08_persona_vectors.json");
 }
 
-export function getModule(language: "zh" | "en", id: string): CourseModule {
+export function getIntrospectionPayload(): IntrospectionPayload {
+  return readJson<IntrospectionPayload>("artifacts/m09_introspection_signals.json");
+}
+
+export function getAssistantAxisPayload(): AssistantAxisPayload {
+  return readJson<AssistantAxisPayload>("artifacts/m10_assistant_axis.json");
+}
+
+export function getModule(_language: "zh" | "en", id: string): CourseModule {
   const module = getCourse().find((entry) => entry.id === id);
   if (!module) {
     throw new Error(`Unknown module: ${id}`);
@@ -140,22 +286,15 @@ export function getColabUrl(relativeNotebookPath: string): string {
 }
 
 export function flattenTimeline(course: CourseModule[]) {
-  const seen = new Set<string>();
-  const timeline = [];
-  for (const module of course) {
-    for (const paper of module.paper_refs) {
-      const key = `${paper.url}:${module.id}`;
-      if (seen.has(key)) {
-        continue;
-      }
-      seen.add(key);
-      timeline.push({
+  return course
+    .map((module) => {
+      const paper = module.paper_refs[0];
+      return {
         ...paper,
         moduleId: module.id,
         moduleTitleEn: module.title_en,
         moduleTitleZh: module.title_zh,
-      });
-    }
-  }
-  return timeline.sort((a, b) => a.date.localeCompare(b.date));
+      };
+    })
+    .sort((a, b) => a.date.localeCompare(b.date));
 }

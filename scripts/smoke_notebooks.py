@@ -22,6 +22,7 @@ def run_notebook(path: Path) -> None:
             continue
         try:
             exec(compile(code, f"{path}:{index}", "exec"), globals_dict, globals_dict)
+            exec("import matplotlib.pyplot as plt; plt.close('all')", globals_dict, globals_dict)
         except Exception as exc:  # noqa: BLE001
             raise RuntimeError(f"{path} failed at code cell {index}: {exc}") from exc
 

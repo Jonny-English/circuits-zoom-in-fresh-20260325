@@ -1,25 +1,48 @@
 # From Circuits to Claude
 
-This course connects the original visual-circuits intuition from `Zoom In` to Anthropic's interpretability arc on superposition, dictionary learning, feature interventions, circuit tracing, and character control.
+This course is article-first: every paper in the core path has its own note, its own notebook, and its own position in the learning sequence.
 
 ## Reading order
 
-1. [M00 Vision Circuits Warm-up](modules/m00-vision-circuits.md)
-2. [M01 Superposition](modules/m01-superposition.md)
-3. [M02 Monosemantic Features and Dictionary Learning](modules/m02-monosemantic-features.md)
-4. [M03 Feature Probes and Steering](modules/m03-feature-probes-steering.md)
-5. [M04 Circuit Tracing](modules/m04-circuit-tracing.md)
-6. [M05 Character and Control](modules/m05-character-control.md)
+1. [M00 Zoom In: An Introduction to Circuits](modules/m00-zoom-in-circuits.md)
+2. [M01 Toy Models of Superposition](modules/m01-toy-models-superposition.md)
+3. [M02 Towards Monosemanticity](modules/m02-towards-monosemanticity.md)
+4. [M03 Mapping the Mind of a Large Language Model](modules/m03-mapping-the-mind.md)
+5. [M04 Using Dictionary Learning Features as Classifiers](modules/m04-features-as-classifiers.md)
+6. [M05 Evaluating Feature Steering](modules/m05-evaluating-feature-steering.md)
+7. [M06 Tracing the Thoughts of a Large Language Model](modules/m06-tracing-thoughts.md)
+8. [M07 Open-sourcing Circuit Tracing Tools](modules/m07-circuit-tracing-tools.md)
+9. [M08 Persona Vectors](modules/m08-persona-vectors.md)
+10. [M09 Signs of Introspection in Large Language Models](modules/m09-signs-of-introspection.md)
+11. [M10 The Assistant Axis](modules/m10-assistant-axis.md)
 
 ## How to use the repo
 
-- Read the module doc first.
-- Run the matching notebook in `notebooks/en`.
-- Inspect the shared JSON artifacts in `artifacts/`.
-- Use `web/` when you want a timeline, concept graph, glossary cards, or progress tracking.
+- Read the note first.
+- Open the paired notebook locally or in Colab.
+- Inspect the JSON artifact when the article is artifact-guided.
+- Answer the self-check questions at the end of the note and notebook rather than stopping at the plots.
+- Use `web/` for the timeline, concept graph, glossary cards, and preview widgets.
+
+## Research-ready track
+
+- [Research-ready overview](program/research-ready.md)
+- [12-week bootcamp](program/week-by-week.md)
+- [Research playbook](program/research-playbook.md)
+- [Evaluation rubric](program/evaluation-rubric.md)
+- [Company onramp simulation](program/company-onramp.md)
+
+Use the track in this order:
+
+1. Read the overview.
+2. Commit to the 12-week schedule.
+3. Use the playbook and templates while you work through the articles.
+4. Score yourself with the rubric at Week 7 and Week 12.
+5. Finish one company-style simulation task and one capstone proposal.
 
 ## Ground rules
 
-- `M00-M03` are meant to be runnable on CPU or free Colab.
-- `M04-M05` are teaching reconstructions built around precomputed artifacts, not full paper-scale reproductions.
-- Chinese and English stay structurally mirrored. If you add a section in one language, add it in the other.
+- `M00-M05` are runnable on CPU or free Colab.
+- `M06-M10` are teaching reconstructions built around precomputed artifacts, not full paper-scale reproductions.
+- Chinese and English stay structurally mirrored. If you add an article note in one language, add it in the other.
+- If your goal is company research readiness, output quality matters more than completion counts.

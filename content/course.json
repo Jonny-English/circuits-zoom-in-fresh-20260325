@@ -2,10 +2,10 @@
   {
     "id": "M00",
     "order": 0,
-    "title_zh": "视觉电路热身",
-    "title_en": "Vision Circuits Warm-up",
-    "summary_zh": "复用原始 Zoom In 视觉电路材料，先建立 feature、circuit 和 intervention 的直觉。",
-    "summary_en": "Reuse the original Zoom In visual-circuits material to establish intuition for features, circuits, and interventions.",
+    "title_zh": "Zoom In：电路入门",
+    "title_en": "Zoom In: An Introduction to Circuits",
+    "summary_zh": "用视觉模型建立 feature、circuit 与 intervention 的最初直觉。",
+    "summary_en": "Build first-pass intuition for features, circuits, and interventions in a visual model.",
     "prereqs": [],
     "paper_refs": [
       {
@@ -19,15 +19,15 @@
       "concept-graph"
     ],
     "runnable_tier": "warmup",
-    "web_slug": "vision-circuits"
+    "web_slug": "zoom-in-circuits"
   },
   {
     "id": "M01",
     "order": 1,
-    "title_zh": "Superposition",
-    "title_en": "Superposition",
-    "summary_zh": "用小型稀疏 toy model 理解为什么神经元经常不是干净的语义单位。",
-    "summary_en": "Use a sparse toy model to understand why neurons are often not clean semantic units.",
+    "title_zh": "Toy Models of Superposition",
+    "title_en": "Toy Models of Superposition",
+    "summary_zh": "用最小 toy model 理解为什么神经元会混装多个语义。",
+    "summary_en": "Use a minimal toy model to see why neurons can mix multiple semantics.",
     "prereqs": [
       "M00"
     ],
@@ -42,15 +42,15 @@
       "concept-graph"
     ],
     "runnable_tier": "cpu-colab",
-    "web_slug": "superposition"
+    "web_slug": "toy-models-superposition"
   },
   {
     "id": "M02",
     "order": 2,
-    "title_zh": "单语义特征与字典学习",
-    "title_en": "Monosemantic Features and Dictionary Learning",
-    "summary_zh": "用教学版 SAE 理解从 neuron 视角过渡到 feature 视角的原因与收益。",
-    "summary_en": "Use a teaching-scale SAE to understand the shift from neuron-centric to feature-centric analysis.",
+    "title_zh": "Towards Monosemanticity",
+    "title_en": "Towards Monosemanticity",
+    "summary_zh": "通过教学版 sparse autoencoder 理解为什么 feature 视角比 neuron 视角更稳。",
+    "summary_en": "Use a teaching-scale sparse autoencoder to see why a feature view can be cleaner than a neuron view.",
     "prereqs": [
       "M01"
     ],
@@ -59,7 +59,25 @@
         "title": "Towards Monosemanticity: Decomposing Language Models With Dictionary Learning",
         "url": "https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning",
         "date": "2023-10-05"
-      },
+      }
+    ],
+    "artifact_refs": [
+      "concept-graph"
+    ],
+    "runnable_tier": "cpu-colab",
+    "web_slug": "towards-monosemanticity"
+  },
+  {
+    "id": "M03",
+    "order": 3,
+    "title_zh": "Mapping the Mind",
+    "title_en": "Mapping the Mind of a Large Language Model",
+    "summary_zh": "浏览教学版 feature catalog，理解“发现大量特征”到底意味着什么。",
+    "summary_en": "Browse a teaching-scale feature catalog to understand what it means to discover many reusable features.",
+    "prereqs": [
+      "M02"
+    ],
+    "paper_refs": [
       {
         "title": "Mapping the Mind of a Large Language Model",
         "url": "https://www.anthropic.com/research/mapping-mind-language-model",
@@ -67,27 +85,46 @@
       }
     ],
     "artifact_refs": [
-      "concept-graph"
+      "concept-graph",
+      "m03-feature-catalog"
     ],
-    "runnable_tier": "cpu-colab",
-    "web_slug": "monosemantic-features"
+    "runnable_tier": "artifact-guided",
+    "web_slug": "mapping-the-mind"
   },
   {
-    "id": "M03",
-    "order": 3,
-    "title_zh": "特征探针与 Steering",
-    "title_en": "Feature Probes and Steering",
-    "summary_zh": "在小型可运行实验里展示 feature 如何同时承担读取和干预的角色。",
-    "summary_en": "Show, in a small runnable experiment, how features can support both reading and intervention.",
+    "id": "M04",
+    "order": 4,
+    "title_zh": "Features as Classifiers",
+    "title_en": "Using Dictionary Learning Features as Classifiers",
+    "summary_zh": "把 feature 当成分类器输入，理解“读出”能力从哪里来。",
+    "summary_en": "Treat features as classifier inputs and study where readout ability comes from.",
     "prereqs": [
-      "M02"
+      "M03"
     ],
     "paper_refs": [
       {
         "title": "Using dictionary learning features as classifiers",
         "url": "https://www.anthropic.com/research/features-as-classifiers",
         "date": "2024-10-16"
-      },
+      }
+    ],
+    "artifact_refs": [
+      "concept-graph"
+    ],
+    "runnable_tier": "cpu-colab",
+    "web_slug": "features-as-classifiers"
+  },
+  {
+    "id": "M05",
+    "order": 5,
+    "title_zh": "Evaluating Feature Steering",
+    "title_en": "Evaluating Feature Steering",
+    "summary_zh": "扫描 steering 强度，观察 target gain、sweet spot 与 off-target cost 的平衡。",
+    "summary_en": "Sweep steering strength to inspect target gain, sweet spots, and off-target costs.",
+    "prereqs": [
+      "M04"
+    ],
+    "paper_refs": [
       {
         "title": "Evaluating feature steering",
         "url": "https://www.anthropic.com/research/evaluating-feature-steering",
@@ -98,25 +135,44 @@
       "concept-graph"
     ],
     "runnable_tier": "cpu-colab",
-    "web_slug": "feature-probes-steering"
+    "web_slug": "evaluating-feature-steering"
   },
   {
-    "id": "M04",
-    "order": 4,
-    "title_zh": "Circuit Tracing",
-    "title_en": "Circuit Tracing",
-    "summary_zh": "借助预计算 attribution graph 学会如何阅读 LLM 的局部计算路径。",
-    "summary_en": "Learn to read local computation paths in an LLM through precomputed attribution graphs.",
+    "id": "M06",
+    "order": 6,
+    "title_zh": "Tracing the Thoughts",
+    "title_en": "Tracing the Thoughts of a Large Language Model",
+    "summary_zh": "用预计算 attribution graph 学会阅读一条局部计算路径。",
+    "summary_en": "Use a precomputed attribution graph to read a local computation path.",
     "prereqs": [
-      "M02",
-      "M03"
+      "M03",
+      "M05"
     ],
     "paper_refs": [
       {
         "title": "Tracing the thoughts of a large language model",
         "url": "https://www.anthropic.com/research/tracing-thoughts-language-model",
         "date": "2025-03-27"
-      },
+      }
+    ],
+    "artifact_refs": [
+      "concept-graph",
+      "m06-attribution-graph"
+    ],
+    "runnable_tier": "artifact-guided",
+    "web_slug": "tracing-thoughts"
+  },
+  {
+    "id": "M07",
+    "order": 7,
+    "title_zh": "Circuit Tracing Tools",
+    "title_en": "Open-sourcing Circuit Tracing Tools",
+    "summary_zh": "查看 tracing artifact 与工作流拆解，理解工具层如何支撑分析。",
+    "summary_en": "Inspect tracing artifacts and workflow stages to understand the tooling layer behind the analysis.",
+    "prereqs": [
+      "M06"
+    ],
+    "paper_refs": [
       {
         "title": "Open-sourcing circuit tracing tools",
         "url": "https://www.anthropic.com/research/open-source-circuit-tracing",
@@ -125,33 +181,72 @@
     ],
     "artifact_refs": [
       "concept-graph",
-      "m04-attribution-graph"
+      "m06-attribution-graph",
+      "m07-tracing-tool-workflow"
     ],
     "runnable_tier": "artifact-guided",
-    "web_slug": "circuit-tracing"
+    "web_slug": "circuit-tracing-tools"
   },
   {
-    "id": "M05",
-    "order": 5,
-    "title_zh": "Character and Control",
-    "title_en": "Character and Control",
-    "summary_zh": "通过 persona vectors 和前沿阅读，把 interpretability 与 character control 连接起来。",
-    "summary_en": "Connect interpretability to character control through persona vectors and frontier reading.",
+    "id": "M08",
+    "order": 8,
+    "title_zh": "Persona Vectors",
+    "title_en": "Persona Vectors",
+    "summary_zh": "通过 persona vector 的前后对比，理解 character trait 如何被表示成方向。",
+    "summary_en": "Use before/after persona-vector comparisons to study character traits as directions.",
     "prereqs": [
-      "M03",
-      "M04"
+      "M05"
     ],
     "paper_refs": [
       {
         "title": "Persona vectors: Monitoring and controlling character traits in language models",
         "url": "https://www.anthropic.com/research/persona-vectors",
         "date": "2025-08-01"
-      },
+      }
+    ],
+    "artifact_refs": [
+      "concept-graph",
+      "m08-persona-vectors"
+    ],
+    "runnable_tier": "artifact-guided",
+    "web_slug": "persona-vectors"
+  },
+  {
+    "id": "M09",
+    "order": 9,
+    "title_zh": "Signs of Introspection",
+    "title_en": "Signs of Introspection in Large Language Models",
+    "summary_zh": "用教学数据对比 self-report 与行为信号，讨论“内省迹象”到底意味着什么。",
+    "summary_en": "Compare self-report and behavior signals in teaching data to discuss what 'signs of introspection' actually mean.",
+    "prereqs": [
+      "M08"
+    ],
+    "paper_refs": [
       {
         "title": "Signs of introspection in large language models",
         "url": "https://www.anthropic.com/research/introspection",
         "date": "2025-10-29"
-      },
+      }
+    ],
+    "artifact_refs": [
+      "concept-graph",
+      "m09-introspection-signals"
+    ],
+    "runnable_tier": "artifact-guided",
+    "web_slug": "signs-of-introspection"
+  },
+  {
+    "id": "M10",
+    "order": 10,
+    "title_zh": "The Assistant Axis",
+    "title_en": "The Assistant Axis",
+    "summary_zh": "把不同 assistant 风格投到同一条轴上，观察 character 稳定化问题。",
+    "summary_en": "Project multiple assistant styles onto one axis and inspect the problem of stabilizing character.",
+    "prereqs": [
+      "M08",
+      "M09"
+    ],
+    "paper_refs": [
       {
         "title": "The assistant axis: situating and stabilizing the character of large language models",
         "url": "https://www.anthropic.com/research/assistant-axis",
@@ -160,9 +255,9 @@
     ],
     "artifact_refs": [
       "concept-graph",
-      "m05-persona-vectors"
+      "m10-assistant-axis"
     ],
     "runnable_tier": "artifact-guided",
-    "web_slug": "character-control"
+    "web_slug": "assistant-axis"
   }
 ]

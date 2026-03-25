@@ -8,15 +8,21 @@ This project is now a bilingual interpretability course with three synced layers
 
 If you touch one layer, make sure the others still line up.
 
+There is also a fourth synced layer for the research-ready track:
+
+4. `content/program.json`, mirrored `docs/*/program`, and `templates/`
+
 ## High-value contributions
 
 **Fix conceptual mistakes.** If a claim about superposition, dictionary learning, circuit tracing, or persona control is wrong or too hand-wavy, open an issue or patch it directly.
 
 **Improve bilingual parity.** Chinese and English should stay structurally identical. Better wording is welcome; mismatched structure is not.
 
-**Strengthen runnable labs.** `M00-M03` should stay CPU-friendly and Colab-friendly. Better toy datasets, clearer plots, and faster smoke execution are especially useful.
+**Strengthen runnable labs.** `M00-M05` should stay CPU-friendly and Colab-friendly. Better toy datasets, clearer plots, and faster smoke execution are especially useful.
 
-**Improve artifacts and visualizations.** `M04-M05` rely on precomputed artifacts. Clearer attribution-graph views, better glossary cards, and more readable persona plots are good contributions.
+**Improve artifacts and visualizations.** `M06-M10` rely on precomputed artifacts. Clearer attribution-graph views, better glossary cards, and more readable persona or assistant-axis plots are good contributions.
+
+**Strengthen the research-ready layer.** Better weekly gates, sharper rubrics, stronger templates, and more realistic company-style tasks are all high-value improvements.
 
 ## Development workflow
 
@@ -34,13 +40,15 @@ If you touch one layer, make sure the others still line up.
 
 ## Structural rules
 
-**Treat `content/course.json` as authoritative.** Module IDs, order, titles, prerequisites, paper links, and artifact references should be edited there first.
+**Treat `content/course.json` as authoritative.** Article IDs, order, prerequisites, paper links, and artifact references should be edited there first.
 
-**Keep docs mirrored.** `docs/zh` and `docs/en` must expose the same modules and the same section structure.
+**Treat `content/program.json` as authoritative for the training layer.** Entry requirements, weekly checkpoints, simulation tasks, and rubric levels should be updated there first.
 
-**Keep notebooks mirrored.** `notebooks/zh` and `notebooks/en` must keep the same module IDs and execution shape. Language can differ; structure should not.
+**Keep docs mirrored.** `docs/zh` and `docs/en` must expose the same article set and the same section structure.
 
-**Do not turn the course into a heavy compute project.** Core labs should remain runnable on CPU or free Colab. Heavy model tracing belongs in optional extensions, not in the required path.
+**Keep notebooks mirrored.** `notebooks/zh` and `notebooks/en` must keep the same article IDs and execution shape. Language can differ; structure should not.
+
+**Do not turn the course into a heavy compute project.** `M00-M05` should remain runnable on CPU or free Colab. Heavy model tracing belongs in artifact-guided articles, not in the required path.
 
 ## Questions
 

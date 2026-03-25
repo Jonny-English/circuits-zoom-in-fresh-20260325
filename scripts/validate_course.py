@@ -36,6 +36,7 @@ PROGRAM_REQUIRED_FIELDS = {
     "entry_requirements_en",
     "study_contract_zh",
     "study_contract_en",
+    "start_tracks",
     "exit_portfolio_zh",
     "exit_portfolio_en",
     "phases",

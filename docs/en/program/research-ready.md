@@ -31,6 +31,24 @@ Use this path only if you already have:
 
 If any of those are missing, fix them first. This path is dense by design.
 
+## Two starting lines
+
+To avoid treating every reader as if they start from the same place, the repository defines two runways:
+
+### Beginner Runway
+
+- For readers who are still below an Alibaba-style `P4` starting state.
+- Start here if you still cannot run notebooks reliably, read basic plots comfortably, or explain what a baseline is.
+- Finish `M00` and `M01` first, and make the reading-note plus experiment-log templates feel routine.
+- The first goal is not immediate research output; it is reaching something close to `P4`.
+
+### Prepared Runway
+
+- For readers who can already run notebooks, use basic PyTorch, and do simple reproductions.
+- Start here if you already have some experiment and reading ability but still lack a systematic interpretability path.
+- Move more quickly through `M00 → M05`, then enter research-ready mode early.
+- The target is to move directly toward `P5`, with strong completers beginning to touch `P6`.
+
 ## What changes when you switch from "course mode" to "research mode"
 
 In course mode, it is enough to understand the idea.

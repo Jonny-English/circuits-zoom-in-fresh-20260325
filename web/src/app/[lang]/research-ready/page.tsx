@@ -42,6 +42,27 @@ export default async function ResearchReadyPage({
       <section className="panel">
         <div className="panel-header">
           <div>
+            <p className="eyebrow">{lang === "zh" ? "双起跑线" : "Two runways"}</p>
+            <h3>{lang === "zh" ? "为小白和有基础者准备的两条起跑线" : "Two starting lines for true beginners and prepared readers"}</h3>
+          </div>
+        </div>
+        <div className="cards">
+          {program.start_tracks.map((track) => (
+            <article className="module-card" key={track.id}>
+              <span className="module-id">{track.id}</span>
+              <strong>{lang === "zh" ? track.title_zh : track.title_en}</strong>
+              <p>{lang === "zh" ? track.audience_zh : track.audience_en}</p>
+              <p>{lang === "zh" ? "进入信号：" : "Entry signal:"} {lang === "zh" ? track.entry_signal_zh : track.entry_signal_en}</p>
+              <p>{lang === "zh" ? "先做什么：" : "First steps:"} {(lang === "zh" ? track.first_steps_zh : track.first_steps_en).join("；")}</p>
+              <p>{lang === "zh" ? "目标：" : "Target:"} {lang === "zh" ? track.target_zh : track.target_en}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="panel">
+        <div className="panel-header">
+          <div>
             <p className="eyebrow">{lang === "zh" ? "训练契约" : "Training contract"}</p>
             <h3>{lang === "zh" ? "保证内容不流于浏览的硬约束" : "Rules that keep this from becoming passive browsing"}</h3>
           </div>

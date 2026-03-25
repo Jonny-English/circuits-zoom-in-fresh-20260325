@@ -42,6 +42,19 @@ export type ProgramPayload = {
   entry_requirements_en: string[];
   study_contract_zh: string[];
   study_contract_en: string[];
+  start_tracks: Array<{
+    id: string;
+    title_zh: string;
+    title_en: string;
+    audience_zh: string;
+    audience_en: string;
+    entry_signal_zh: string;
+    entry_signal_en: string;
+    first_steps_zh: string[];
+    first_steps_en: string[];
+    target_zh: string;
+    target_en: string;
+  }>;
   exit_portfolio_zh: string[];
   exit_portfolio_en: string[];
   phases: Array<{

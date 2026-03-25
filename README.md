@@ -43,6 +43,24 @@ On that scale, no single teaching project should claim "finish this and become `
 
 The credible target of this repository is narrower: move a true beginner from below an Alibaba-style `P4` state toward `P5`, with strong completers beginning to touch the lower edge of `P6`. It is the start of a research path, not the end-state.
 
+## Two Starting Lines
+
+To serve both true beginners and readers with some prior foundation, the repository now defines two explicit runways:
+
+### Beginner Runway
+
+- Best for: readers who know some Python but still have unstable environment setup, math fluency, and experiment discipline.
+- Entry signal: you still cannot run notebooks reliably, read basic plots comfortably, or explain what a baseline is.
+- Recommended path: finish `M00` and `M01` first, make the reading-note and experiment-log templates feel routine, then enter the full course.
+- Target: first move toward something close to Alibaba-style `P4`, then continue toward `P5`.
+
+### Prepared Runway
+
+- Best for: readers who can already run notebooks, use basic PyTorch, and read common plots, but lack a systematic interpretability roadmap.
+- Entry signal: you can already do simple reproductions and keep basic notes, but you do not yet have a coherent research path.
+- Recommended path: move quickly through `M00 → M05`, then switch into research-ready mode early and start writing memos plus failure analysis.
+- Target: move directly toward Alibaba-style `P5`, with strong completers beginning to touch `P6`.
+
 ## Why Learn This
 
 After the spinning jenny appeared, the center of value in textile work stopped being "who has the most refined hand-spinning technique." It shifted toward:

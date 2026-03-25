@@ -33,6 +33,50 @@
     "Do not skip writing. People who cannot write short memos are usually not yet doing clear research.",
     "Do not treat a plot as a conclusion. A plot is evidence, not the entire judgment."
   ],
+  "start_tracks": [
+    {
+      "id": "T0",
+      "title_zh": "小白起跑线",
+      "title_en": "Beginner Runway",
+      "audience_zh": "适合还没进入阿里式 P4 状态的读者：会一点 Python，但环境、数学、实验记录都不稳定。",
+      "audience_en": "For readers who are still below an Alibaba-style P4 starting state: they know some Python, but their environment setup, math fluency, and experiment discipline are still unstable.",
+      "entry_signal_zh": "如果你还不能稳定跑 notebook、看懂 loss/accuracy 图、解释 baseline 是什么，就从这里开始。",
+      "entry_signal_en": "Start here if you still cannot run notebooks reliably, read simple loss/accuracy plots, or explain what a baseline is.",
+      "first_steps_zh": [
+        "先完成 M00 和 M01，不着急追求速度。",
+        "先把 paper reading note、experiment log 模板用顺手。",
+        "先把目标放在进入接近 P4，再进入完整研究路径。"
+      ],
+      "first_steps_en": [
+        "Finish M00 and M01 first without trying to move too fast.",
+        "Make the paper-reading-note and experiment-log templates feel routine.",
+        "Aim first to reach something close to P4 before entering the full research path."
+      ],
+      "target_zh": "目标：从“完全新手”推进到接近阿里式 P4，再去冲击 P5。",
+      "target_en": "Target: move from a true beginner state toward something close to Alibaba-style P4, then continue toward P5."
+    },
+    {
+      "id": "T1",
+      "title_zh": "基础者起跑线",
+      "title_en": "Prepared Runway",
+      "audience_zh": "适合已经有一定基础的读者：能跑 notebook、会基本 PyTorch、能看懂常见图表，但没有系统 interpretability 路线。",
+      "audience_en": "For readers who already have some foundation: they can run notebooks, know basic PyTorch, and read common plots, but do not yet have a systematic interpretability path.",
+      "entry_signal_zh": "如果你已经能独立跑实验、读简单论文并写基础笔记，可以从这里切入。",
+      "entry_signal_en": "Start here if you can already run simple experiments independently, read straightforward papers, and keep basic notes.",
+      "first_steps_zh": [
+        "按 M00 → M05 快速完成 foundations 和 feature 主线。",
+        "尽早进入 research-ready 模式，开始写 memo 和 failure analysis。",
+        "把目标直接放在接近 P5，并尝试摸到 P6 门槛。"
+      ],
+      "first_steps_en": [
+        "Move quickly through M00 → M05 to lock in the foundations and feature track.",
+        "Switch into research-ready mode early and start writing memos plus failure analysis.",
+        "Aim directly at P5 readiness and start touching the lower edge of P6."
+      ],
+      "target_zh": "目标：从“有基础但没体系”推进到接近阿里式 P5，高质量完成者开始摸到 P6。",
+      "target_en": "Target: move from 'some foundation but no system' toward Alibaba-style P5, with strong completers beginning to touch P6."
+    }
+  ],
   "exit_portfolio_zh": [
     "至少 6 份 paper reading notes，覆盖 foundations、features、tracing、character 四个阶段。",
     "至少 6 份 experiment logs，其中至少 3 份包含参数 sweep 或失败分析。",

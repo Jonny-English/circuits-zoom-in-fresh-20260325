@@ -1,169 +1,38 @@
 # Learn Interpretability
 
 [**中文版 README**](README_zh.md) ·
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE) ·
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
-`Learn Interpretability` is a bilingual, Colab-first interpretability training project for readers who know basic Python and PyTorch but are new to mechanistic interpretability. The repository is now paper-reproduction-first: every core paper in the path has one mirrored note, and every honestly runnable paper gets one Colab notebook.
+`Learn Interpretability` is a bilingual, Colab-first training repo for readers who know basic Python and PyTorch but are new to mechanistic interpretability. The project is paper-reproduction-first: every core paper has a mirrored note, and every honestly runnable item has a paired Colab notebook.
 
-If this repository saves you weeks of scattered paper-hopping, gives you a usable Colab path, or helps you build a serious interpretability study habit, give it a star.
-
-## Why This Repo Is Worth Opening
-
-- You do not need prior interpretability experience; the project is designed for beginners who can already handle basic Python and PyTorch.
-- You can open a real Colab in the first session instead of reading for hours before touching code.
-- The live-code boundary is explicit: runnable notebooks are runnable, and anything else is labeled `reading-only`.
-- The long-term promise is concrete, not vague: the full path is aimed at a credible `P6-ready` outcome, not passive familiarity.
-
-## Repository Snapshot
-
-- `4` foundation labs for setup, plots, attention reading, and experiment discipline
-- `5` live core notebooks for the strict runnable path: `M00`, `M01`, `M02`, `M04`, `M05`
-- `7` runnable extension drills after the core
-- `32` notebooks smoke-tested in the current repo
-- `180-250` focused hours for the full `P6-ready` path
-
-## Fast Answers
-
-- `Do I need a GPU?` No. The current live path is designed for CPU or free Colab.
-- `Do I need prior interpretability experience?` No. You need basic Python/PyTorch plus the willingness to write notes and logs.
-- `How quickly will I know whether this repo fits me?` Usually within the first weekend if you try `F00`, `M00`, and `M01`.
-- `Does the repo claim I automatically become P6?` No. `P6-ready` is only the claim after the full path and the evidence gates.
-
-## Try It In Your First Hour
-
-- `30-45 min`: [F00 Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/foundations/en/f00_environment_plots_baselines.ipynb)
-  Build a working Colab loop, read a loss curve, and learn what a baseline is.
-- `45-60 min`: [M00 Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/en/m00_zoom_in_circuits.ipynb)
-  Get first intuition for features, circuits, and interventions through a visual model.
-- `60-90 min`: [M01 Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/en/m01_toy_models_superposition.ipynb)
-  Run the first paper-shaped reproduction and see why neurons can mix multiple semantics.
-
-If you want a stricter proof-of-fit before committing to the whole repo, use the [first-week proof path](docs/en/program/first-week-checklist.md).
+If the repository saves you time, gives you a usable path, or helps you stop random paper-hopping, star it.
 
 ## Start Here
 
-- If notebook setup, plots, or experiment discipline still feel shaky, start with `F00 -> F03`.
-- If you can already run notebooks and know basic PyTorch, start with the live core: `M00 -> M05`.
-- If your goal is the full `P6-ready` path, open [docs/en/program/research-ready.md](docs/en/program/research-ready.md) and [docs/en/program/p6-graduation-checklist.md](docs/en/program/p6-graduation-checklist.md) before you begin.
-- If you prefer the mirrored Chinese path, use [README_zh.md](README_zh.md) and [docs/zh/index.md](docs/zh/index.md).
+- New to notebooks, plots, or experiment discipline: start with `F00 -> F03`
+- Already comfortable with basic PyTorch and notebooks: start with the live core `M00 -> M05`
+- Not sure whether the repo fits you: use the [first-week proof path](docs/en/program/first-week-checklist.md)
+- Want the full target instead of just a few Colabs: read [research-ready.md](docs/en/program/research-ready.md) and [p6-graduation-checklist.md](docs/en/program/p6-graduation-checklist.md)
 
-The repository has three core synced layers:
+## What This Repo Promises
 
-- `content/course.json` is the single source of truth for order, prerequisites, links, and artifacts.
-- `docs/en` and `docs/zh` mirror each other exactly.
-- `notebooks/en` and `notebooks/zh` mirror each other exactly, with live notebooks only for runnable items and no generated notebooks for `reading-only` items.
+- `Bilingual`: English and Chinese stay structurally mirrored
+- `Colab-first`: the main runnable path is designed for CPU or free Colab
+- `Live-code only`: runnable work must generate outputs at runtime; anything else is marked `reading-only`
+- `P6-ready target`: the honest claim is not “finish a few notebooks”; it is “an ordinary undergraduate can reach a credible `P6-ready` result after the full path and evidence gates”
 
-It now also has four reinforcement layers:
+## Repo Snapshot
 
-- a `Pre-P4 foundation pack` that repairs environment setup, attention-shape intuition, vector geometry, and experiment discipline
-- a `research-ready path` with a 12-week bootcamp, memo templates, a rubric, and self-directed research sprints
-- a `reference-output layer` that calibrates deliverable quality against concrete examples
-- an `extension reproduction track` that widens the research view beyond the Anthropic core arc with more Colab reproductions
+- `4` foundation labs
+- `5` live core notebooks
+- `7` runnable extension drills
+- `32` notebooks smoke-tested
+- `180-250` focused hours for the full `P6-ready` path
 
-The point is to stop the most common self-study failure mode: finishing the reading without building reproduction habits, writing habits, or research judgment.
+## Foundations
 
-Strict rule from this point on:
-
-- only code that generates its outputs live at runtime counts as runnable work
-- anything that still depends on precomputed JSON artifacts is downgraded to `reading-only`
-- a simplified live notebook may exist as a `method-lab`, but it may not be advertised as a full paper reproduction
-
-## Who This Project Is For
-
-- It is beginner-friendly for readers with basic Python and PyTorch but little or no mechanistic-interpretability background.
-- It is for readers who want to move from "I can follow a few papers" to "I can reproduce papers in Colab, critique them, and eventually own a scoped line of interpretability work."
-- It is not designed as passive popularization. You are expected to write reading notes, experiment logs, and short memos.
-
-The target output of this repository is not "a person who has seen many papers." The direct goal is to help a serious undergraduate or independent learner reach the repository's described Alibaba-style `P6`: someone who can take a clearly scoped research task, critique evidence, and propose the next experiment.
-
-To reduce ambiguity, the ladder below is rewritten to match the public, commonly used understanding of Alibaba-style `P4-P12` technical levels:
-
-| Level | Capability |
-|---|---|
-| `P4` | Entry-level engineer: can work under explicit guidance, run notebooks, reproduce setup steps, and explain basic concepts, but still lacks strong independent research judgment. |
-| `P5` | Engineer: can independently reproduce a scoped result, keep experiment logs, compare baseline versus variant, and write basic conclusions. |
-| `P6` | Senior engineer / strong IC starting point: can take a clearly scoped research task in a lab, study group, or independent project, read papers, reproduce results, critique evidence, and propose the next experiment. |
-| `P7` | Expert: can define a small direction, design a two-week research plan, and close the loop across experiments, tools, and reporting. |
-| `**P8**` | Senior expert: can own a research sub-area or tooling line and create sustained technical leverage across multiple collaborators. |
-| `P9` | Principal / senior expert: can define a medium-term research thread and influence methods, judgment, and collaboration across teams. |
-| `P10` | Fellow / organization-level expert: can set organization-level research direction, choose key methodological bets, and influence product and safety strategy. |
-| `P11` | Company-level top technical leader: can define long-term agenda, standards, and talent systems. |
-| `P12` | Industry-shaping figure: can significantly change how the field frames the technology and its control problems. |
-
-On that scale, the rows above `P6` are context, not this repository's direct completion promise. The honest claim is not "finish 12 weeks and become `P10`" or "`P8`." The honest claim is: if an ordinary undergraduate finishes the full program seriously, including the extension reproductions and the evidence gates, calling the result `P6-ready` is plausible.
-
-The correct framing is staged:
-
-- `F00-F03` plus the early core move a true beginner from below `P4` toward `P4/P5`.
-- `M00-M10` plus the research-ready bootcamp build the core apprenticeship segment of the `P6-ready` path.
-- at least three extension reproductions plus the dossier, memo, critique, and proposal gates are required before the repository should call the outcome `P6-ready`
-- `X01-X07` beyond that deepen the `P6` floor and help strong learners start moving toward early `P7`.
-- `P8` still requires multi-year original work and collaborator leverage outside this repository's direct promise.
-
-So this repository should be judged by whether it can honestly build `P6-ready` behavior for an ordinary undergraduate across the full program, not only the 12-week bootcamp. `P7` and `P8` are included only as context for what lies beyond one repository and one bootcamp. Under the strict policy, only `paper-faithful` and `method-lab` items count as live code.
-
-## Two Starting Lines
-
-To serve both true beginners and readers with some prior foundation, the repository now defines two explicit runways:
-
-### Beginner Runway
-
-- Best for: readers who know some Python but still have unstable environment setup, math fluency, and experiment discipline.
-- Entry signal: you still cannot run notebooks reliably, read basic plots comfortably, or explain what a baseline is.
-- Recommended path: finish `F00-F03` plus `M00` and `M01`, make the reading-note and experiment-log templates feel routine, then enter the full course and later the extension reproductions.
-- Target: first move toward something close to Alibaba-style `P4`, then use the core, bootcamp, and extension tracks to enter a credible `P6-ready` state.
-
-### Prepared Runway
-
-- Best for: readers who can already run notebooks, use basic PyTorch, and read common plots, but lack a systematic interpretability roadmap.
-- Entry signal: you can already do simple reproductions and keep basic notes, but you do not yet have a coherent research path.
-- Recommended path: move quickly through the runnable `M00 → M05` core, then insert `M03` and `M06-M10` as reading-and-critique tasks, switch into research-ready mode early, and continue into the extension reproductions.
-- Target: move directly into the full `P6-ready` path rather than stopping at notebook completion.
-
-## Why Learn This
-
-After the spinning jenny appeared, the center of value in textile work stopped being "who has the most refined hand-spinning technique." It shifted toward:
-
-- who understood the machine
-- who could use the machine well
-- who could modify the machine
-- who could reorganize production around the machine
-
-The large-model era creates the same shift.
-
-When models can already perform a large amount of local cognitive work, the scarce skill is no longer only "manually weaving every sentence, reasoning step, or code block by hand." The scarce skill becomes:
-
-- understanding what the model is representing internally
-- understanding why it succeeds and why it fails
-- understanding which directions can be read out, intervened on, and controlled safely
-- understanding how to turn those judgments into research, tooling, and product decisions
-
-So learning interpretability is not just learning a set of paper summaries. It is learning how to understand and steer machine intelligence once the machine itself becomes the central productive object.
-
-Put more precisely: AI is also just another layer of abstraction over lower-level computation.
-
-- Assembly is a layer of abstraction over machine code.
-- High-level languages are another layer over assembly.
-- Large models and AI systems are one more layer of abstraction built on top of those computational stacks.
-
-So the right focus is no longer only the fine-grained craft of manually executing the old workflow. The focus shifts toward:
-
-- what capability this abstraction layer exposes
-- what mechanism this abstraction layer hides
-- how we understand, use, debug, and control this abstraction layer
-
-That is also why this repository is not only about paper summaries. It is about Colab reproductions, experiments, artifacts, steering, tracing, editing, auditing, and research communication.
-
-## What You Can Expect If You Stay With It
-
-- After the first hour: you should have run at least one real notebook and written the first lines of a reading note or experiment log.
-- After the first weekend: you should know whether the beginner runway or the prepared runway is the right fit, and you should have completed one live paper reproduction.
-- After the full path: you should have a portfolio of notes, logs, memos, critiques, and extension reproductions strong enough for the repo to call the result `P6-ready`.
-
-## Pre-P4 Foundation Pack
-
-If notebooks, plots, attention shapes, or baseline/sweep/ablation discipline still feel unstable, do not rush into the paper core. Repair those four labs first.
+Use these labs if setup, plots, attention reading, or experiment discipline still feel unstable.
 
 <!-- FOUNDATION_TABLE:START -->
 | ID | Foundation Lab | Notebook | Colab | Runnable tier | What it repairs |
@@ -174,9 +43,9 @@ If notebooks, plots, attention shapes, or baseline/sweep/ablation discipline sti
 | `F03` | Sweeps, Ablations, and Failure Analysis | [Open](notebooks/foundations/en/f03_sweeps_ablations_failure_analysis.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/foundations/en/f03_sweeps_ablations_failure_analysis.ipynb) | `cpu-colab` | Use one small experiment to practice sweeps, ablations, stop conditions, and failure analysis so 'I can run notebooks' becomes 'I can design a minimal experiment.' |
 <!-- FOUNDATION_TABLE:END -->
 
-## One Article, One Colab
+## Core Paper Track
 
-Each row below corresponds to exactly one paper and one notebook. Every paired note and Colab notebook now also includes self-check questions so readers can test whether they actually absorbed the material.
+This is the main article path. `reading-only` means the note stays in the repo, but the notebook is intentionally not generated because it would not meet the strict live-code policy.
 
 <!-- COURSE_TABLE:START -->
 | ID | Paper | Date | Status | Notebook | Colab | Runnable tier | What you will do |
@@ -194,49 +63,21 @@ Each row below corresponds to exactly one paper and one notebook. Every paired n
 | `M10` | The Assistant Axis | `2026-01-19` | `reading-only` | Reading | - | `reading-only` | Project multiple assistant styles onto one axis and inspect the problem of stabilizing character. |
 <!-- COURSE_TABLE:END -->
 
-## Suggested Paths
+## Research-Ready Layer
 
-- `Pre-P4 foundation pack`: `F00 → F01 → F02 → F03`
-- `Live core path`: `M00 → M01 → M02 → M04 → M05`
-- `Reading-only papers for now`: `M03`, `M06`, `M07`, `M08`, `M09`, `M10`
-- `Extension method labs`: `X01 → X02 → X03 → X04 → X05 → X06 → X07`
-
-If you want the shortest strict live-code path, start with `F00`, then `M00`, `M01`, `M02`, `M05`, and `X01`.
-
-## Research-Ready Path
-
-If your goal is not just understanding but becoming effective as a student researcher or independent researcher, use these files alongside the article notebooks:
+Use these docs when your goal shifts from “I followed the notebook” to “I can work like a junior interpretability researcher.”
 
 - [Research-ready overview](docs/en/program/research-ready.md)
-- [Colab-first path](docs/en/program/colab-first-path.md)
+- [First-week proof path](docs/en/program/first-week-checklist.md)
 - [Capability arc and P6 evidence gates](docs/en/program/capability-arc.md)
 - [P6 graduation checklist](docs/en/program/p6-graduation-checklist.md)
 - [12-week bootcamp](docs/en/program/week-by-week.md)
 - [Research playbook](docs/en/program/research-playbook.md)
-- [Evaluation rubric](docs/en/program/evaluation-rubric.md)
 - [Independent research sprints](docs/en/program/independent-sprints.md)
-- [Reference-output layer](docs/en/program/reference-outputs.md)
-- [Advanced extension track](docs/en/program/advanced-extensions.md)
 
-Templates:
+## Reference Outputs
 
-- [Paper reading note](templates/paper_reading_note_en.md)
-- [Experiment log](templates/experiment_log_en.md)
-- [Research memo](templates/research_memo_en.md)
-
-Internal training stages now use `S0-S4` so they stay clearly separate from the Alibaba-style `P4-P12` capability mapping above. The `S0-S4` bootcamp is the core floor-building segment, not the whole long-horizon growth arc.
-
-Use the research-ready track as an operating system, not as extra reading:
-
-- Every article should leave behind a reading note, an experiment log, a short memo, and a next-question list.
-- The weekly path assumes `8-12` focused hours per week.
-- You should finish with a real portfolio: notes, logs, memos, an artifact critique, and a two-week capstone proposal.
-- The bar is not "I followed the notebooks." The bar is "I can read, reproduce, critique, and propose the next experiment."
-- The bootcamp alone is not the `P6-ready` claim; that claim starts only after you also clear the P6 graduation checklist.
-
-## Reference-Output Layer
-
-This layer is not for copying. It is for calibrating what a deliverable looks like when it is ready for a mentor, advisor, collaborator, or peer reviewer, which matters even more once you start the extension reproductions.
+Use these when you need to calibrate whether your notes, logs, or proposals are dense enough.
 
 <!-- REFERENCE_TABLE:START -->
 | ID | Reference Output | File | When to use it |
@@ -247,82 +88,42 @@ This layer is not for copying. It is for calibrating what a deliverable looks li
 | `R04` | Reference Two-Week Proposal | [examples/en/reference_two_week_proposal.md](examples/en/reference_two_week_proposal.md) | Use it before a capstone or independent sprint T4 to calibrate the density of your proposal. |
 <!-- REFERENCE_TABLE:END -->
 
-## Extension-Paper Track
+## Extension Track
 
-The core course is intentionally organized around the Anthropic interpretability arc, but that is still not broad enough if your goal is an honest `P6-ready` claim or anything beyond it. After the core apprenticeship segment, widen out into transformer circuits, behavior circuits, memory/editing, and auditing-facing work through more Colab reproductions.
-
-Under the strict realtime policy, the status column matters:
-
-- `paper-faithful`: runnable and honest as a paper-shaped reproduction
-- `method-lab`: runnable, but explicitly a live method drill rather than a full paper reproduction
-- `reading-only`: kept for reading and critique only because this repository would otherwise rely on precomputed artifacts or unavailable stacks
+The Anthropic core is not enough by itself. After the core, continue into transformer circuits, memory/editing, and auditing through the extension notes and Colabs. Full reading order lives in [docs/en/extensions/index.md](docs/en/extensions/index.md).
 
 <!-- EXTENSION_TABLE:START -->
-| ID | Extension Paper | Link | Status | Notebook | Colab | Runnable tier | Why now | What to ship |
-|---|---|---|---|---|---|---|---|---|
-| `X01` | A Mathematical Framework for Transformer Circuits | [Source](https://transformer-circuits.pub/2021/framework/index.html) | `method-lab` | [Open](notebooks/extensions/en/x01_transformer_circuits_framework.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x01_transformer_circuits_framework.ipynb) | `cpu-colab` | After M06, this moves you from 'I can read one graph' to 'I can speak the general framework.' | Reproduce one minimal residual-composition toy in Colab, then write a one-page framework brief that restates one M06 toy trace using residual-stream and composition language. |
-| `X02` | In-context Learning and Induction Heads | [Source](https://transformer-circuits.pub/2022/in-context-learning-and-induction-heads/index.html) | `method-lab` | [Open](notebooks/extensions/en/x02_induction_heads.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x02_induction_heads.ipynb) | `cpu-colab` | It connects attention reading, circuit language, and a concrete behavioral phenomenon, making it a first stop for classic transformer-circuits work. | Reproduce one minimal copying task in Colab and explain why an induction head is more like a mechanism than a single attention hotspot. |
-| `X03` | Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 Small | [Source](https://arxiv.org/abs/2211.00593) | `method-lab` | [Open](notebooks/extensions/en/x03_ioi_circuit.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x03_ioi_circuit.ipynb) | `cpu-colab` | After the Anthropic core path, this forces you to handle messier behavior definitions, more heads, and a longer evidence chain. | Reproduce a teaching-scale IOI evidence chain in Colab, then write one brief stating which uncertainties appear here that were absent in the M06 toy trace. |
-| `X04` | Transformer Feed-Forward Layers Are Key-Value Memories | [Source](https://arxiv.org/abs/2012.14913) | `method-lab` | [Open](notebooks/extensions/en/x04_ffn_key_value_memories.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x04_ffn_key_value_memories.ipynb) | `cpu-colab` | If you can only read attention circuits but cannot explain what an MLP stores, it is hard to move into factual recall and model editing. | Reproduce a teaching-scale key-value memory toy in Colab, then write one note explaining why some facts look more like MLP retrieval than on-the-fly attention computation. |
-| `X05` | Knowledge Neurons in Pretrained Transformers | [Source](https://arxiv.org/abs/2104.08696) | `method-lab` | [Open](notebooks/extensions/en/x05_knowledge_neurons.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x05_knowledge_neurons.ipynb) | `cpu-colab` | This paper forces you to separate 'some units predict the phenomenon' from 'those units truly carry the phenomenon.' | Reproduce a teaching-scale knowledge-neuron scoring and ablation experiment in Colab, then write one note explaining why a high-scoring neuron still does not automatically yield a causal explanation. |
-| `X06` | Locating and Editing Factual Associations in GPT | [Source](https://arxiv.org/abs/2202.05262) | `method-lab` | [Open](notebooks/extensions/en/x06_rome_factual_editing.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x06_rome_factual_editing.ipynb) | `cpu-colab` | If you want to move from graph reading to intervention judgment, reading graphs is not enough; you also need to discuss whether an edit is stable, local, and worth pursuing. | Reproduce a teaching-scale rank-one factual edit in Colab, then write one edit memo describing how to evaluate edit success, locality, and collateral damage together. |
-| `X07` | Auditing Language Models for Hidden Objectives | [Source](https://www.anthropic.com/research/auditing-hidden-objectives) | `method-lab` | [Open](notebooks/extensions/en/x07_auditing_hidden_objectives.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x07_auditing_hidden_objectives.ipynb) | `cpu-colab` | If you want one coherent frame that connects features, tracing, editing, and auditing, this paper puts them into one view. | Reproduce a teaching-scale auditing toy in Colab, then write one memo describing which behavioral signals, internal evidence, and stop conditions you would inspect first if you suspected a hidden objective. |
+| ID | Extension Paper | Status | Note | Notebook | Colab |
+|---|---|---|---|---|---|
+| `X01` | A Mathematical Framework for Transformer Circuits | `method-lab` | [Note](docs/en/extensions/x01-transformer-circuits-framework.md) | [Open](notebooks/extensions/en/x01_transformer_circuits_framework.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x01_transformer_circuits_framework.ipynb) |
+| `X02` | In-context Learning and Induction Heads | `method-lab` | [Note](docs/en/extensions/x02-induction-heads.md) | [Open](notebooks/extensions/en/x02_induction_heads.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x02_induction_heads.ipynb) |
+| `X03` | Interpretability in the Wild: a Circuit for Indirect Object Identification in GPT-2 Small | `method-lab` | [Note](docs/en/extensions/x03-ioi-circuit.md) | [Open](notebooks/extensions/en/x03_ioi_circuit.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x03_ioi_circuit.ipynb) |
+| `X04` | Transformer Feed-Forward Layers Are Key-Value Memories | `method-lab` | [Note](docs/en/extensions/x04-ffn-key-value-memories.md) | [Open](notebooks/extensions/en/x04_ffn_key_value_memories.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x04_ffn_key_value_memories.ipynb) |
+| `X05` | Knowledge Neurons in Pretrained Transformers | `method-lab` | [Note](docs/en/extensions/x05-knowledge-neurons.md) | [Open](notebooks/extensions/en/x05_knowledge_neurons.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x05_knowledge_neurons.ipynb) |
+| `X06` | Locating and Editing Factual Associations in GPT | `method-lab` | [Note](docs/en/extensions/x06-rome-factual-editing.md) | [Open](notebooks/extensions/en/x06_rome_factual_editing.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x06_rome_factual_editing.ipynb) |
+| `X07` | Auditing Language Models for Hidden Objectives | `method-lab` | [Note](docs/en/extensions/x07-auditing-hidden-objectives.md) | [Open](notebooks/extensions/en/x07_auditing_hidden_objectives.ipynb) | [Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/extensions/en/x07_auditing_hidden_objectives.ipynb) |
 <!-- EXTENSION_TABLE:END -->
 
-## Quick Start
+## Local Workflow
 
 ```bash
 pip install -r requirements.txt
-
-# Refresh derived assets after editing course metadata
 python3 scripts/render_readmes.py
 python3 scripts/generate_course_notebooks.py
-
-# Validate metadata, docs, notebook parity, and links
 python3 scripts/validate_course.py
-python3 scripts/check_links.py
-
-# Enforce the no-precomputed-artifact rule for live notebooks
 python3 scripts/audit_realtime_policy.py
-
-# Execute all generated notebooks as a smoke test
+python3 scripts/check_links.py
 python3 scripts/smoke_notebooks.py
 ```
 
-If you prefer the lightest workflow, open the Colab links in the tables above directly and skip local setup until you need it.
+If you only want to learn, open the Colab links above and ignore local setup until you need it.
 
-## Repo Structure
+## Project Navigation
 
-```text
-.
-├── content/               # Course metadata and glossary
-├── docs/                  # Mirrored zh/en article notes + foundations + extension notes + bootcamp docs
-├── notebooks/             # Legacy notebook + article notebooks + foundation labs + extension reproductions
-├── examples/              # Reference briefs, logs, critiques, and proposals
-├── artifacts/             # Reading-only reference data; not allowed in strict live notebooks
-├── scripts/               # Notebook generation and validation
-├── figures/               # Legacy visual circuit figures reused by M00
-└── utils/                 # Shared plotting helpers from the original tutorial
-```
-
-## What Stays From the Original Project
-
-The original notebooks remain in place:
-
-- `notebooks/circuits_zoom_in_en.ipynb`
-- `notebooks/circuits_zoom_in_zh.ipynb`
-
-They now act as the long-form background material behind `M00`.
-
-## References
-
-The core reading path is anchored in official Anthropic research pages as of `2026-03-25`, with the interpretability team page as the index:
-
-- [Anthropic Interpretability team page](https://www.anthropic.com/research/team/interpretability)
-- [Toy Models of Superposition](https://www.anthropic.com/research/toy-models-of-superposition)
-- [Towards Monosemanticity](https://www.anthropic.com/research/towards-monosemanticity-decomposing-language-models-with-dictionary-learning)
-- [Mapping the Mind of a Large Language Model](https://www.anthropic.com/research/mapping-mind-language-model)
-- [Tracing the thoughts of a large language model](https://www.anthropic.com/research/tracing-thoughts-language-model)
+- [English docs index](docs/en/index.md)
+- [Chinese docs index](docs/zh/index.md)
+- [English repo map](docs/en/repo-map.md)
+- [Chinese repo map](docs/zh/repo-map.md)
 
 ## License
 

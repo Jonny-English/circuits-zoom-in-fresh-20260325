@@ -49,6 +49,11 @@ def extension_notebook_path(item: dict, language: str) -> str:
     return f"notebooks/extensions/{language}/{filename}"
 
 
+def extension_doc_path(item: dict, language: str) -> str:
+    filename = f"{item['id'].lower()}-{item['notebook_slug'].replace('_', '-')}.md"
+    return f"docs/{language}/extensions/{filename}"
+
+
 def extension_colab_url(item: dict, language: str) -> str:
     return (
         "https://colab.research.google.com/github/"
@@ -116,15 +121,15 @@ def build_reference_table(items: list[dict], language: str) -> str:
 
 def build_extension_table(items: list[dict], language: str) -> str:
     if language == "zh":
-        header = "| ID | 扩展论文 | 链接 | 状态 | Notebook | Colab | 运行层级 | 为什么现在读 | 你要交什么 |\n|---|---|---|---|---|---|---|---|---|"
+        header = "| ID | 扩展论文 | 状态 | 讲义 | Notebook | Colab |\n|---|---|---|---|---|---|"
         rows = [
-            f"| `{item['id']}` | {item['title_zh']} | [原文]({item['source_url']}) | `{item['delivery_mode']}` | [打开]({extension_notebook_path(item, 'zh')}) | [Colab]({extension_colab_url(item, 'zh')}) | `{item['runnable_tier']}` | {item['why_now_zh']} | {item['assignment_zh']} |"
+            f"| `{item['id']}` | {item['title_zh']} | `{item['delivery_mode']}` | [讲义]({extension_doc_path(item, 'zh')}) | [打开]({extension_notebook_path(item, 'zh')}) | [Colab]({extension_colab_url(item, 'zh')}) |"
             for item in items
         ]
     else:
-        header = "| ID | Extension Paper | Link | Status | Notebook | Colab | Runnable tier | Why now | What to ship |\n|---|---|---|---|---|---|---|---|---|"
+        header = "| ID | Extension Paper | Status | Note | Notebook | Colab |\n|---|---|---|---|---|---|"
         rows = [
-            f"| `{item['id']}` | {item['title_en']} | [Source]({item['source_url']}) | `{item['delivery_mode']}` | [Open]({extension_notebook_path(item, 'en')}) | [Colab]({extension_colab_url(item, 'en')}) | `{item['runnable_tier']}` | {item['why_now_en']} | {item['assignment_en']} |"
+            f"| `{item['id']}` | {item['title_en']} | `{item['delivery_mode']}` | [Note]({extension_doc_path(item, 'en')}) | [Open]({extension_notebook_path(item, 'en')}) | [Colab]({extension_colab_url(item, 'en')}) |"
             for item in items
         ]
     return "\n".join([header, *rows])

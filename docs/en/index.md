@@ -1,85 +1,42 @@
 # Learn Interpretability
 
-This course is now Colab-first under a strict honesty rule: only notebooks that generate outputs live at runtime count as runnable work. Anything that still depends on precomputed artifacts is treated as reading-only.
+This is the documentation home for the repository. Use it when you want a cleaner navigation surface than the root README.
 
-If you are opening the repo for the first time, do not start by reading everything. Start by proving to yourself that one Colab runs.
+## Start Paths
 
-## First session
+- New and unstable on setup or plots: [foundations/index.md](foundations/index.md)
+- Want a go/no-go test before going deep: [program/first-week-checklist.md](program/first-week-checklist.md)
+- Ready for the live core: start with `M00`, `M01`, `M02`, `M04`, `M05`
+- Want the full long-horizon path: [program/research-ready.md](program/research-ready.md)
 
-- [F00 Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/foundations/en/f00_environment_plots_baselines.ipynb): fix setup and learn baseline discipline
-- [M00 Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/en/m00_zoom_in_circuits.ipynb): get the first intuition for features and circuits
-- [M01 Colab](https://colab.research.google.com/github/Jonny-English/learn-interpretability/blob/main/notebooks/en/m01_toy_models_superposition.ipynb): run the first paper-shaped reproduction
+## Documentation Layers
 
-If you want a stricter go/no-go check, use the [first-week proof path](program/first-week-checklist.md).
+- [Foundation pack](foundations/index.md)
+- [Core modules](modules/m00-zoom-in-circuits.md)
+- [Extension track](extensions/index.md)
+- [Research-ready docs](program/research-ready.md)
+- [Repo map](repo-map.md)
 
-Current repo snapshot:
-
-- `4` foundation labs
-- `5` live core notebooks
-- `7` runnable extension drills
-- `32` notebooks smoke-tested
-- `180-250` focused hours for the full `P6-ready` path
-
-## Pre-P4 foundation pack
-
-- [Foundation pack overview](foundations/index.md)
-- If notebook execution, attention reading, or experiment logging still feel unstable, do `F00-F03` before the article core.
-
-## Reading order
+## Live-Core Reading Order
 
 1. [M00 Zoom In: An Introduction to Circuits](modules/m00-zoom-in-circuits.md)
 2. [M01 Toy Models of Superposition](modules/m01-toy-models-superposition.md)
 3. [M02 Towards Monosemanticity](modules/m02-towards-monosemanticity.md)
-4. [M03 Mapping the Mind of a Large Language Model](modules/m03-mapping-the-mind.md)
-5. [M04 Using Dictionary Learning Features as Classifiers](modules/m04-features-as-classifiers.md)
-6. [M05 Evaluating Feature Steering](modules/m05-evaluating-feature-steering.md)
-7. [M06 Tracing the Thoughts of a Large Language Model](modules/m06-tracing-thoughts.md)
-8. [M07 Open-sourcing Circuit Tracing Tools](modules/m07-circuit-tracing-tools.md)
-9. [M08 Persona Vectors](modules/m08-persona-vectors.md)
-10. [M09 Signs of Introspection in Large Language Models](modules/m09-signs-of-introspection.md)
-11. [M10 The Assistant Axis](modules/m10-assistant-axis.md)
+4. [M04 Using Dictionary Learning Features as Classifiers](modules/m04-features-as-classifiers.md)
+5. [M05 Evaluating Feature Steering](modules/m05-evaluating-feature-steering.md)
 
-## Extension reproduction track
+Reading-only notes remain in the repo and still matter:
 
-- [Extension-paper overview](extensions/index.md)
-- After the core, do not stop at "I finished the Anthropic arc." Continue with classic transformer-circuits, memory/editing, and auditing papers as Colab reproductions.
+- [M03 Mapping the Mind of a Large Language Model](modules/m03-mapping-the-mind.md)
+- [M06 Tracing the Thoughts of a Large Language Model](modules/m06-tracing-thoughts.md)
+- [M07 Open-sourcing Circuit Tracing Tools](modules/m07-circuit-tracing-tools.md)
+- [M08 Persona Vectors](modules/m08-persona-vectors.md)
+- [M09 Signs of Introspection in Large Language Models](modules/m09-signs-of-introspection.md)
+- [M10 The Assistant Axis](modules/m10-assistant-axis.md)
 
-## How to use the repo
+## Ground Rules
 
-- Read the note first.
-- If the item is marked `paper-faithful` or `method-lab`, open the paired notebook locally or in Colab.
-- If the item is marked `reading-only`, treat it as a paper note rather than a runnable reproduction.
-- Answer the self-check questions at the end of the note and notebook rather than stopping at the plots.
-- Turn each reproduction into a reading note, an experiment log, and a short memo rather than keeping it only in your head.
-
-## Research-ready track
-
-- [Research-ready overview](program/research-ready.md)
-- [First-week proof path](program/first-week-checklist.md)
-- [Colab-first path](program/colab-first-path.md)
-- [Capability arc and P6 evidence gates](program/capability-arc.md)
-- [P6 graduation checklist](program/p6-graduation-checklist.md)
-- [12-week bootcamp](program/week-by-week.md)
-- [Research playbook](program/research-playbook.md)
-- [Evaluation rubric](program/evaluation-rubric.md)
-- [Independent research sprints](program/independent-sprints.md)
-- [Reference-output layer](program/reference-outputs.md)
-- [Advanced extension track](program/advanced-extensions.md)
-
-Use the track in this order:
-
-1. Read the overview.
-2. Commit to the 12-week schedule as the core apprenticeship stage, not the whole finish line.
-3. Use the playbook and templates while you work through the articles.
-4. Score yourself with the rubric at Week 7 and Week 12.
-5. Clear the P6 graduation checklist after the bootcamp.
-6. Finish one independent research sprint and one capstone proposal.
-
-## Ground rules
-
-- Under the strict realtime policy, the live core path is `M00`, `M01`, `M02`, `M04`, and `M05`; `M03` and `M06-M10` are currently reading-only because this repo would otherwise rely on precomputed artifacts.
-- `X01-X07` stay runnable, but they are method labs rather than claims of full paper-faithful reproduction.
-- Use `python3 scripts/audit_realtime_policy.py` after notebook generation if you want the repo to enforce the no-precomputed-artifact rule.
-- Chinese and English stay structurally mirrored. If you add an article note in one language, add it in the other.
-- If your goal is serious research growth, output quality matters more than completion counts.
-- If the repo gives you a clear path and saves you time, star it so more beginners can find it.
+- Only notebooks that generate outputs live at runtime count as runnable work.
+- `reading-only` means the note stays, but the notebook is intentionally not generated.
+- `X01-X07` are runnable method labs, not claims of full paper-faithful reproduction.
+- If the repo helps you find a clear path, star it so more beginners can find it.

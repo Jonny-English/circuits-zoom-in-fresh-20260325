@@ -74,6 +74,11 @@ EXPECTED_PROGRAM_DOCS = {
     "advanced-extensions.md",
 }
 
+EXPECTED_ROOT_DOCS = {
+    "index.md",
+    "repo-map.md",
+}
+
 EXPECTED_TEMPLATE_FILES = {
     "paper_reading_note_en.md",
     "paper_reading_note_zh.md",
@@ -345,10 +350,14 @@ def main() -> None:
         )
 
     for language in ("zh", "en"):
-        index_path = DOCS_ROOT / language / "index.md"
-        assert_exists(index_path, f"missing docs index for {language}")
+        root_dir = DOCS_ROOT / language
+        actual_root_docs = {path.name for path in root_dir.glob("*.md")}
+        if actual_root_docs != EXPECTED_ROOT_DOCS:
+            fail(
+                f"{language} root docs mismatch. expected={sorted(EXPECTED_ROOT_DOCS)}, actual={sorted(actual_root_docs)}"
+            )
 
-        docs_dir = DOCS_ROOT / language / "modules"
+        docs_dir = root_dir / "modules"
         actual_docs = {path.name for path in docs_dir.glob("*.md")}
         if actual_docs != expected_docs[language]:
             fail(

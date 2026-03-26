@@ -4,7 +4,7 @@ This project is now a bilingual interpretability course with three synced layers
 
 1. `content/course.json` as the source of truth
 2. mirrored `docs/zh` and `docs/en`
-3. mirrored `notebooks/zh` and `notebooks/en`, plus a static `web/` explorer
+3. mirrored `notebooks/zh` and `notebooks/en`
 
 If you touch one layer, make sure the others still line up.
 
@@ -22,7 +22,7 @@ There is also a fourth synced layer for the research-ready track:
 
 **Improve artifacts and visualizations.** `M06-M10` rely on precomputed artifacts. Clearer attribution-graph views, better glossary cards, and more readable persona or assistant-axis plots are good contributions.
 
-**Strengthen the research-ready layer.** Better weekly gates, sharper rubrics, stronger templates, and more realistic company-style tasks are all high-value improvements.
+**Strengthen the research-ready layer.** Better weekly gates, sharper rubrics, stronger templates, and stronger independent research sprints are all high-value improvements.
 
 ## Development workflow
 
@@ -35,14 +35,11 @@ There is also a fourth synced layer for the research-ready track:
    `python3 scripts/validate_course.py`
    `python3 scripts/smoke_notebooks.py`
    `python3 scripts/check_links.py`
-5. If you changed the web app, also run:
-   `cd web && npm install && npm run build`
-
 ## Structural rules
 
 **Treat `content/course.json` as authoritative.** Article IDs, order, prerequisites, paper links, and artifact references should be edited there first.
 
-**Treat `content/program.json` as authoritative for the training layer.** Entry requirements, weekly checkpoints, simulation tasks, and rubric levels should be updated there first.
+**Treat `content/program.json` as authoritative for the training layer.** Entry requirements, weekly checkpoints, independent sprints, and rubric levels should be updated there first.
 
 **Keep docs mirrored.** `docs/zh` and `docs/en` must expose the same article set and the same section structure.
 

@@ -1,5 +1,5 @@
 [project]
-name = "from-circuits-to-claude"
+name = "learn-interpretability"
 version = "0.1.0"
 description = "A bilingual course that connects visual circuits intuition to Anthropic's interpretability research arc"
 readme = "README.md"

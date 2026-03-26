@@ -1,10 +1,10 @@
-# From Circuits to Claude
+# Learn Interpretability
 
 [**English README**](README.md) ·
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
-`From Circuits to Claude` 是一个面向初学者的双语、Colab 优先 interpretability 训练项目。仓库现在改成了“论文复现优先”结构：核心路径里的每一篇论文，都有一份同步讲义；凡是能诚实实时复现的论文，再配一份独立 Colab notebook。
+`Learn Interpretability` 是一个面向初学者的双语、Colab 优先 interpretability 训练项目。仓库现在改成了“论文复现优先”结构：核心路径里的每一篇论文，都有一份同步讲义；凡是能诚实实时复现的论文，再配一份独立 Colab notebook。
 
 仓库由三层核心同步层组成：
 

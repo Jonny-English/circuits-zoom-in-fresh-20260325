@@ -1,4 +1,4 @@
-# From Circuits to Claude
+# Learn Interpretability
 
 This course is now Colab-first under a strict honesty rule: only notebooks that generate outputs live at runtime count as runnable work. Anything that still depends on precomputed artifacts is treated as reading-only.
 

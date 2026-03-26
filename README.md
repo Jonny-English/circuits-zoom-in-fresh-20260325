@@ -1,10 +1,10 @@
-# From Circuits to Claude
+# Learn Interpretability
 
 [**中文版 README**](README_zh.md) ·
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Python 3.9+](https://img.shields.io/badge/python-3.9+-blue.svg)](https://www.python.org/downloads/)
 
-`From Circuits to Claude` is a bilingual, Colab-first interpretability training project for readers who know basic Python and PyTorch but are new to mechanistic interpretability. The repository is now paper-reproduction-first: every core paper in the path has one mirrored note, and every honestly runnable paper gets one Colab notebook.
+`Learn Interpretability` is a bilingual, Colab-first interpretability training project for readers who know basic Python and PyTorch but are new to mechanistic interpretability. The repository is now paper-reproduction-first: every core paper in the path has one mirrored note, and every honestly runnable paper gets one Colab notebook.
 
 The repository has three core synced layers:
 

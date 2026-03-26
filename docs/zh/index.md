@@ -1,4 +1,4 @@
-# From Circuits to Claude
+# Learn Interpretability
 
 这门课现在是带严格诚实规则的 Colab 优先结构：只有在运行时实时产生输出的 notebook，才算可运行内容；凡是仍然依赖预计算 artifact 的部分，一律按阅读材料处理。
 

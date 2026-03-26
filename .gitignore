@@ -28,10 +28,3 @@ Thumbs.db
 .venv/
 venv/
 env/
-
-# Node / web
-web/node_modules/
-web/.next/
-web/out/
-web/.vercel/
-*.tsbuildinfo

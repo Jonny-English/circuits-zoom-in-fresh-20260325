@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import re
 import sys
 import time
 import urllib.error
@@ -14,6 +15,7 @@ from repo_metadata import current_repo_url
 ROOT = Path(__file__).resolve().parents[1]
 COURSE_PATH = ROOT / "content" / "course.json"
 EXTENSIONS_PATH = ROOT / "content" / "extensions.json"
+MARKDOWN_LINK_RE = re.compile(r"(?<!!)\[[^\]]+\]\(([^)]+)\)")
 EXTRA_LINKS = [
     "https://github.com/shareAI-lab/learn-claude-code",
     "https://www.anthropic.com/research/team/interpretability",
@@ -33,6 +35,50 @@ def check_url(url: str) -> tuple[bool, str]:
         return False, f"HTTP {error.code}"
     except Exception as error:  # noqa: BLE001
         return False, str(error)
+
+
+def markdown_files() -> list[Path]:
+    files = list(ROOT.glob("*.md"))
+    files.extend((ROOT / "docs").rglob("*.md"))
+    files.extend((ROOT / "examples").rglob("*.md"))
+    files.extend((ROOT / "templates").rglob("*.md"))
+    files.extend((ROOT / "launch").rglob("*.md"))
+    return sorted(set(files))
+
+
+def check_markdown_links(path: Path) -> list[str]:
+    problems: list[str] = []
+    in_fence = False
+    for line_number, raw_line in enumerate(path.read_text().splitlines(), start=1):
+        stripped = raw_line.strip()
+        if stripped.startswith("```"):
+            in_fence = not in_fence
+            continue
+        if in_fence:
+            continue
+        for match in MARKDOWN_LINK_RE.finditer(raw_line):
+            target = match.group(1).strip().strip("<>")
+            if not target or target.startswith(("http://", "https://", "mailto:", "#")):
+                continue
+            if target.startswith("/"):
+                problems.append(f"{path.relative_to(ROOT)}:{line_number} uses absolute local link {target}")
+                continue
+            target_path = target.split("#", maxsplit=1)[0]
+            if not target_path:
+                continue
+            resolved = (path.parent / target_path).resolve()
+            try:
+                resolved.relative_to(ROOT.resolve())
+            except ValueError:
+                problems.append(
+                    f"{path.relative_to(ROOT)}:{line_number} points outside repo with link {target}"
+                )
+                continue
+            if not resolved.exists():
+                problems.append(
+                    f"{path.relative_to(ROOT)}:{line_number} points to missing path {target}"
+                )
+    return problems
 
 
 def main() -> None:
@@ -63,6 +109,13 @@ def main() -> None:
     if failures:
         details = ", ".join(f"{url} -> {detail}" for url, detail in failures)
         raise SystemExit(f"link check failed: {details}")
+
+    markdown_failures: list[str] = []
+    for path in markdown_files():
+        markdown_failures.extend(check_markdown_links(path))
+
+    if markdown_failures:
+        raise SystemExit("markdown link check failed: " + "; ".join(markdown_failures))
 
 
 if __name__ == "__main__":

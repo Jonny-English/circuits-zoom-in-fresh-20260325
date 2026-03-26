@@ -26,18 +26,18 @@ Use this page if you want to understand how the repository is organized without 
 
 ## What Is Source Of Truth
 
-- [content/course.json](/Users/xxxyyy/Desktop/interpretability/content/course.json): article order, status, prerequisites, and paper metadata
-- [content/foundations.json](/Users/xxxyyy/Desktop/interpretability/content/foundations.json): foundation labs
-- [content/program.json](/Users/xxxyyy/Desktop/interpretability/content/program.json): research-ready path, weeks, and graduation rules
-- [content/extensions.json](/Users/xxxyyy/Desktop/interpretability/content/extensions.json): extension-track papers
-- [content/reference_outputs.json](/Users/xxxyyy/Desktop/interpretability/content/reference_outputs.json): calibrated example outputs
+- [content/course.json](../../content/course.json): article order, status, prerequisites, and paper metadata
+- [content/foundations.json](../../content/foundations.json): foundation labs
+- [content/program.json](../../content/program.json): research-ready path, weeks, and graduation rules
+- [content/extensions.json](../../content/extensions.json): extension-track papers
+- [content/reference_outputs.json](../../content/reference_outputs.json): calibrated example outputs
 
 If you want to change the curriculum, start there, not in the generated tables.
 
 ## What Is Generated Or Derived
 
-- [README.md](/Users/xxxyyy/Desktop/interpretability/README.md) and [README_zh.md](/Users/xxxyyy/Desktop/interpretability/README_zh.md) contain rendered tables
-- runnable notebooks under [notebooks/en](/Users/xxxyyy/Desktop/interpretability/notebooks/en), [notebooks/zh](/Users/xxxyyy/Desktop/interpretability/notebooks/zh), [notebooks/foundations](/Users/xxxyyy/Desktop/interpretability/notebooks/foundations), and [notebooks/extensions](/Users/xxxyyy/Desktop/interpretability/notebooks/extensions) are generated
+- [README.md](../../README.md) and [README_zh.md](../../README_zh.md) contain rendered tables
+- runnable notebooks under `notebooks/en`, `notebooks/zh`, `notebooks/foundations`, and `notebooks/extensions` are generated
 
 When metadata changes, refresh these derived surfaces instead of editing them by hand.
 
@@ -55,8 +55,8 @@ python3 scripts/smoke_notebooks.py
 
 ## Non-Core Material
 
-- [notebooks/circuits_zoom_in_en.ipynb](/Users/xxxyyy/Desktop/interpretability/notebooks/circuits_zoom_in_en.ipynb)
-- [notebooks/circuits_zoom_in_zh.ipynb](/Users/xxxyyy/Desktop/interpretability/notebooks/circuits_zoom_in_zh.ipynb)
+- [notebooks/circuits_zoom_in_en.ipynb](../../notebooks/circuits_zoom_in_en.ipynb)
+- [notebooks/circuits_zoom_in_zh.ipynb](../../notebooks/circuits_zoom_in_zh.ipynb)
 
 These are the original long-form background notebooks behind `M00`. They stay in the repo, but they are not the main navigation surface anymore.
 

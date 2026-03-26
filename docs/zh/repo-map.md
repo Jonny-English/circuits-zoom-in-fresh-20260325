@@ -26,18 +26,18 @@
 
 ## 哪些文件是真相源
 
-- [content/course.json](/Users/xxxyyy/Desktop/interpretability/content/course.json)：文章顺序、状态、先修关系和论文信息
-- [content/foundations.json](/Users/xxxyyy/Desktop/interpretability/content/foundations.json)：基础包 labs
-- [content/program.json](/Users/xxxyyy/Desktop/interpretability/content/program.json)：research-ready 路径、周计划和毕业规则
-- [content/extensions.json](/Users/xxxyyy/Desktop/interpretability/content/extensions.json)：扩展论文轨道
-- [content/reference_outputs.json](/Users/xxxyyy/Desktop/interpretability/content/reference_outputs.json)：参考输出样例
+- [content/course.json](../../content/course.json)：文章顺序、状态、先修关系和论文信息
+- [content/foundations.json](../../content/foundations.json)：基础包 labs
+- [content/program.json](../../content/program.json)：research-ready 路径、周计划和毕业规则
+- [content/extensions.json](../../content/extensions.json)：扩展论文轨道
+- [content/reference_outputs.json](../../content/reference_outputs.json)：参考输出样例
 
 如果你要改课程结构，先改这些文件，不要先改生成出来的表格。
 
 ## 哪些内容是派生出来的
 
-- [README.md](/Users/xxxyyy/Desktop/interpretability/README.md) 和 [README_zh.md](/Users/xxxyyy/Desktop/interpretability/README_zh.md) 里的表格是渲染结果
-- [notebooks/en](/Users/xxxyyy/Desktop/interpretability/notebooks/en)、[notebooks/zh](/Users/xxxyyy/Desktop/interpretability/notebooks/zh)、[notebooks/foundations](/Users/xxxyyy/Desktop/interpretability/notebooks/foundations)、[notebooks/extensions](/Users/xxxyyy/Desktop/interpretability/notebooks/extensions) 里的 runnable notebooks 也是生成出来的
+- [README.md](../../README.md) 和 [README_zh.md](../../README_zh.md) 里的表格是渲染结果
+- `notebooks/en`、`notebooks/zh`、`notebooks/foundations`、`notebooks/extensions` 里的 runnable notebooks 也是生成出来的
 
 只要 metadata 改了，就应该刷新这些派生面，而不是手工改它们。
 
@@ -55,8 +55,8 @@ python3 scripts/smoke_notebooks.py
 
 ## 非主线材料
 
-- [notebooks/circuits_zoom_in_zh.ipynb](/Users/xxxyyy/Desktop/interpretability/notebooks/circuits_zoom_in_zh.ipynb)
-- [notebooks/circuits_zoom_in_en.ipynb](/Users/xxxyyy/Desktop/interpretability/notebooks/circuits_zoom_in_en.ipynb)
+- [notebooks/circuits_zoom_in_zh.ipynb](../../notebooks/circuits_zoom_in_zh.ipynb)
+- [notebooks/circuits_zoom_in_en.ipynb](../../notebooks/circuits_zoom_in_en.ipynb)
 
 这两个是旧版的长篇背景 notebook，现在主要作为 `M00` 的背景材料保留，不再是主导航入口。
 
